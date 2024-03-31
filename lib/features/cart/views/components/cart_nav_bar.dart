@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
+import 'package:smart_soft/features/cart/views/blocs/cart/cart_cubit.dart';
 
 import '../../../../core/config/app_images.dart';
 import '../../../../core/config/app_theme.dart';
@@ -55,7 +56,7 @@ class CartNavBar extends StatelessWidget {
                   Space(width: 2.w,),
 
                   Text(
-                    "980",
+                    (CartSuccess.cartResponse?.obj?.price ?? 00).toString(),
                     style: AppTheme.mainTextStyle(
                         color: AppTheme.neutral900, fontSize: 14.sp),
                   ),

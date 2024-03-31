@@ -5,6 +5,7 @@ import 'package:sizer/sizer.dart';
 import 'package:smart_soft/core/config/app_images.dart';
 import 'package:smart_soft/core/views/widgets/custom_progress_indicator.dart';
 import 'package:smart_soft/features/home/views/bloc/home/home_cubit.dart';
+import 'package:smart_soft/features/home/views/components/customer_drawer.dart';
 import 'package:smart_soft/features/home/views/components/home_card.dart';
 
 import '../../../../core/config/app_consts.dart';
@@ -31,6 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: context.read<HomeCubit>().scaffoldKey,
+      drawer: CustomerDrawer(),
       body: SafeArea(
         child: ListView(
           shrinkWrap: true,
@@ -43,7 +46,9 @@ class _HomeScreenState extends State<HomeScreen> {
               child: HomeAppBar(
                 title: LocaleKeys.home.tr(),
                 trailingIcon: AppImages.menu,
-                onTrailingIconTap: () {},
+                onTrailingIconTap: () {
+                  context.read<HomeCubit>().openDrawer();
+                },
                 leadingIcon: AppImages.cart,
                 onLeadingIconTap: () {
                   context.read<HomeCubit>().navigateToCartScreen(context);

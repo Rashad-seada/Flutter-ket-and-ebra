@@ -12,7 +12,7 @@ class GetAllCitiesUseCase {
 
   CoreFeaturesRepo repo = getIt<CoreFeaturesRepo>();
 
-  Future<Either<Failure, GetAllCitiesResponse>> call(String phoneNumber,String password) async {
+  Future<Either<Failure, GetAllCitiesResponse>> call() async {
     return await repo.getAllCities();
   }
 

@@ -4,38 +4,57 @@ import 'package:sizer/sizer.dart';
 
 import '../../../../core/config/app_images.dart';
 import '../../../../core/config/app_theme.dart';
+import '../../../../core/core_feature/data/entities/citie_entity.dart';
 
-class LocationDropDown extends StatelessWidget {
+class LocationDropDown extends StatefulWidget {
   double? width;
   double? height;
-  void Function()? onTap;
-  LocationDropDown({super.key,this.height,this.width,this.onTap});
 
+
+  List<CityEntity> cities;
+  CityEntity selectedCity;
+
+  void Function(CityEntity?)? onChanged;
+
+  LocationDropDown({super.key,this.height,this.width,this.onChanged, required this.cities,required this.selectedCity});
+
+  @override
+  State<LocationDropDown> createState() => _LocationDropDownState();
+}
+
+class _LocationDropDownState extends State<LocationDropDown> {
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 3.w),
-      width: width,
-      height: height,
+      width: widget.width,
+      height: widget.height,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(3.w),
         border: Border.all(color: AppTheme.neutral300,width: 1),
       ),
       child: DropdownButtonHideUnderline(
-        child: DropdownButton<String>(
+        child: DropdownButton<CityEntity>(
           style: AppTheme.mainTextStyle(
               color: AppTheme.neutral400, fontSize: 12.sp),
-          value: "Option 1",
-          onChanged: (String? newValue) {
-        
+          value: widget.selectedCity,
+          onChanged: (city){
+            setState(() {
+              if(widget.onChanged != null){
+                widget.onChanged!(city);
+              }
+            });
+
           },
-          items: <String>['Option 1', 'Option 2', 'Option 3']
-              .map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
-            );
-          }).toList(),
+          items: widget.cities
+              .map<DropdownMenuItem<CityEntity>>(
+              (CityEntity value) {
+                return DropdownMenuItem<CityEntity>(
+                  value: value,
+                  child: Text(value.name ?? ''),
+                );
+              }
+          ).toList(),
         ),
       ),
 

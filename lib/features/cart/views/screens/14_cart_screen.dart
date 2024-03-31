@@ -69,8 +69,13 @@ class _CartScreenState extends State<CartScreen> {
                   itemCount: CartSuccess.cartResponse?.obj?.details?.length ?? 0,
                   itemBuilder: (BuildContext context, int index) {
                     return CartCard(
-                      price: 00,
-                      fabric:  CartSuccess.cartResponse?.obj?.details?[index].textureId.toString() ?? '--',
+                      price:
+
+                      (CartSuccess.cartResponse?.obj?.details?[index].buttonsPrice?.toDouble() ?? 0) +
+                      (CartSuccess.cartResponse?.obj?.details?[index].embroideryPrice?.toDouble() ?? 0 )+
+                      (CartSuccess.cartResponse?.obj?.details?[index].texturePrice?.toDouble() ?? 0 ),
+
+                      fabric:  CartSuccess.cartResponse?.obj?.details?[index].textureName.toString() ?? '--',
                     );
                   },
                 );
