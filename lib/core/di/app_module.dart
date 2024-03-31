@@ -32,6 +32,11 @@ import 'package:smart_soft/features/home/data/repo/home_repo_impl.dart';
 import 'package:smart_soft/features/home/domain/repo/home_repo.dart';
 import 'package:smart_soft/features/home/domain/usecases/get_home_ads_use_case.dart';
 import 'package:smart_soft/features/home/domain/usecases/set_home_ads_use_case.dart';
+import 'package:smart_soft/features/order/data/data_source/remote/order_remote_data_source.dart';
+import 'package:smart_soft/features/order/data/repo/order_repo_impl.dart';
+import 'package:smart_soft/features/order/domain/repo/order_repo.dart';
+import 'package:smart_soft/features/order/domain/usecases/create_order_use_case.dart';
+import 'package:smart_soft/features/order/domain/usecases/get_order_use_case.dart';
 import 'package:smart_soft/features/seller/seller_variation/data/repo/seller_variation_repo_impl.dart';
 import 'package:smart_soft/features/seller/seller_variation/domain/repo/seller_variation_repo.dart';
 import 'package:smart_soft/features/seller/seller_variation/domain/usecase/create_button_use_case.dart';
@@ -87,6 +92,9 @@ abstract class AppModule {
     getIt.registerSingleton<CartRemoteDataSource>(CartRemoteDataSourceImpl());
     // ------ Home ------
     getIt.registerSingleton<HomeRemoteDataSource>(HomeRemoteDataSourceImpl());
+    // ------ Order ------
+    getIt.registerSingleton<OrderRemoteDataSource>(OrderRemoteDataSourceImpl());
+
 
     //repos
     // ------ Auth ------
@@ -101,6 +109,8 @@ abstract class AppModule {
     getIt.registerSingleton<CartRepo>(CartRepoImpl());
     // ------ Home ------
     getIt.registerSingleton<HomeRepo>(HomeRepoImpl());
+    // ------ Order ------
+    getIt.registerSingleton<OrderRepo>(OrderRepoImpl());
 
 
     //use case
@@ -149,6 +159,10 @@ abstract class AppModule {
     // ------ Home ------
     getIt.registerSingleton<GetHomeAdsUseCase>(GetHomeAdsUseCase());
     getIt.registerSingleton<SetHomeAdsUseCase>(SetHomeAdsUseCase());
+
+    // ------ Order ------
+    getIt.registerSingleton<CreateOrderUseCase>(CreateOrderUseCase());
+    getIt.registerSingleton<GetOrderUseCase>(GetOrderUseCase());
 
 
     // ------ Core Features ------

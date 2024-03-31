@@ -35,6 +35,10 @@ class AppConsts {
   static const String getHomeEndPoint = "/Admin/GetHomeData";
   static const String setHomeAdEndPoint = "/Admin/SetHomeAds";
 
+  //----- Order ------
+  static const String createOrderEndPoint = "/ItemOrder/CreateOrder";
+  static const String getAllOrdersEndPoint = "/ItemOrder/GetAllUserOrder";
+
 
   //----- shared pref -----
   static const String boxName = "USER_BOX";

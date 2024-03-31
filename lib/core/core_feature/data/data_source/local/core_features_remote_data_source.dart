@@ -30,7 +30,7 @@ class CoreFeaturesRemoteDataSourceImpl implements CoreFeaturesRemoteDataSource{
         throw RemoteDataException("The was a server internal error");
       }
 
-      Map<String,dynamic> responseData = json.decode(response.data);
+      Map<String,dynamic> responseData = response.data;
 
       return GetAllCitiesResponse.fromJson(responseData);
 

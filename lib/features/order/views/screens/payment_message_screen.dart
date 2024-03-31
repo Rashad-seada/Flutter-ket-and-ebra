@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../core/config/app_images.dart';
@@ -9,7 +8,7 @@ import '../../../../core/config/app_theme.dart';
 import '../../../../core/views/widgets/main_button.dart';
 import '../../../../core/views/widgets/space.dart';
 import '../../../../generated/locale_keys.g.dart';
-import '../blocs/payments/payments_cubit.dart';
+import '../blocs/orders/order_cubit.dart';
 
 class PaymentMessageScreen extends StatelessWidget {
   const PaymentMessageScreen({super.key});
@@ -75,7 +74,7 @@ class PaymentMessageScreen extends StatelessWidget {
                 style: AppTheme.mainTextStyle(
                     color: AppTheme.neutral100, fontSize: 10.sp),
               ).tr(),
-              onTap: ()=> context.read<PaymentsCubit>().onPaymentMessageDoneClick(context),
+              onTap: ()=> context.read<OrderCubit>().onPaymentMessageDoneClick(context),
             ),
 
 

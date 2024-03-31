@@ -8,7 +8,7 @@ import '../../../../core/views/widgets/custom_header.dart';
 import '../../../../core/views/widgets/main_button.dart';
 import '../../../../core/views/widgets/space.dart';
 import '../../../../generated/locale_keys.g.dart';
-import '../blocs/payments/payments_cubit.dart';
+import '../blocs/orders/order_cubit.dart';
 import '../components/payment_methods_component.dart';
 
 class PaymentMethodsScreen extends StatelessWidget {
@@ -51,7 +51,7 @@ class PaymentMethodsScreen extends StatelessWidget {
                 style: AppTheme.mainTextStyle(
                     color: AppTheme.neutral100, fontSize: 13.sp),
               ).tr(),
-              onTap: ()=> context.read<PaymentsCubit>().onPaymentConfirmClick(context),
+              onTap: ()=> context.read<OrderCubit>().onPaymentConfirmClick(context),
             ),
 
 

@@ -52,23 +52,40 @@ class Obj {
 }
 
 class Details {
-  int? id;
-  int? height;
-  int? shoulder;
-  int? armLenght;
-  int? chestWide;
-  int? neck;
-  int? handSize;
-  int? kbkLength;
-  int? textureId;
-  int? yakaId;
-  int? chestId;
-  int? frontPocketId;
-  int? handId;
-  int? buttonsId;
-  int? embroideryId;
-  int? itemCartId;
-  int? sellerrId;
+  num? id;
+  num? height;
+  num? shoulder;
+  num? armLenght;
+  num? chestWide;
+  num? neck;
+  num? handSize;
+  num? kbkLength;
+  num? textureId;
+  num? yakaId;
+  num? chestId;
+  num? frontPocketId;
+  String? textureName;
+  String? textureImg;
+  num? texturePrice;
+  String? yakaName;
+  String? yakaUrl;
+  String? chestName;
+  String? chestUrl;
+  String? frontPocketName;
+  String? frontPocketUrl;
+  String? handName;
+  String? handUrl;
+  String? buttonsName;
+  String? buttonsUrl;
+  num? buttonsPrice;
+  String? embroideryName;
+  String? embroideryUrl;
+  num? embroideryPrice;
+  num? handId;
+  num? buttonsId;
+  num? embroideryId;
+  num? itemCartId;
+  num? sellerrId;
 
   Details(
       {this.id,
@@ -83,6 +100,23 @@ class Details {
         this.yakaId,
         this.chestId,
         this.frontPocketId,
+        this.textureName,
+        this.textureImg,
+        this.texturePrice,
+        this.yakaName,
+        this.yakaUrl,
+        this.chestName,
+        this.chestUrl,
+        this.frontPocketName,
+        this.frontPocketUrl,
+        this.handName,
+        this.handUrl,
+        this.buttonsName,
+        this.buttonsUrl,
+        this.buttonsPrice,
+        this.embroideryName,
+        this.embroideryUrl,
+        this.embroideryPrice,
         this.handId,
         this.buttonsId,
         this.embroideryId,
@@ -102,6 +136,23 @@ class Details {
     yakaId = json['yakaId'];
     chestId = json['chestId'];
     frontPocketId = json['frontPocketId'];
+    textureName = json['textureName'];
+    textureImg = json['textureImg'];
+    texturePrice = json['texturePrice'];
+    yakaName = json['yakaName'];
+    yakaUrl = json['yakaUrl'];
+    chestName = json['chestName'];
+    chestUrl = json['chestUrl'];
+    frontPocketName = json['frontPocketName'];
+    frontPocketUrl = json['frontPocketUrl'];
+    handName = json['handName'];
+    handUrl = json['handUrl'];
+    buttonsName = json['buttonsName'];
+    buttonsUrl = json['buttonsUrl'];
+    buttonsPrice = json['buttonsPrice'];
+    embroideryName = json['embroideryName'];
+    embroideryUrl = json['embroideryUrl'];
+    embroideryPrice = json['embroideryPrice'];
     handId = json['handId'];
     buttonsId = json['buttonsId'];
     embroideryId = json['embroideryId'];
@@ -123,6 +174,23 @@ class Details {
     data['yakaId'] = this.yakaId;
     data['chestId'] = this.chestId;
     data['frontPocketId'] = this.frontPocketId;
+    data['textureName'] = this.textureName;
+    data['textureImg'] = this.textureImg;
+    data['texturePrice'] = this.texturePrice;
+    data['yakaName'] = this.yakaName;
+    data['yakaUrl'] = this.yakaUrl;
+    data['chestName'] = this.chestName;
+    data['chestUrl'] = this.chestUrl;
+    data['frontPocketName'] = this.frontPocketName;
+    data['frontPocketUrl'] = this.frontPocketUrl;
+    data['handName'] = this.handName;
+    data['handUrl'] = this.handUrl;
+    data['buttonsName'] = this.buttonsName;
+    data['buttonsUrl'] = this.buttonsUrl;
+    data['buttonsPrice'] = this.buttonsPrice;
+    data['embroideryName'] = this.embroideryName;
+    data['embroideryUrl'] = this.embroideryUrl;
+    data['embroideryPrice'] = this.embroideryPrice;
     data['handId'] = this.handId;
     data['buttonsId'] = this.buttonsId;
     data['embroideryId'] = this.embroideryId;

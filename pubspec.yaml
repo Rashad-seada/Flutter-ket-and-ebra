@@ -56,11 +56,8 @@ dependencies:
   get_it:
 
   # Firebase
-  cloud_firestore:
-  firebase_analytics:
   firebase_auth:
   firebase_core:
-  firebase_crashlytics:
 
   activout_firebase_options_selector:
 
