@@ -9,6 +9,7 @@ import 'package:smart_soft/features/cart/views/blocs/cart/cart_cubit.dart';
 import 'package:smart_soft/features/home/views/bloc/home/home_cubit.dart';
 import 'package:smart_soft/features/order/views/blocs/get_orders/get_orders_cubit.dart';
 import 'package:smart_soft/features/order/views/blocs/orders/order_cubit.dart';
+import 'package:smart_soft/features/seller/add_variation/views/bloc/add_variation/add_variation_cubit.dart';
 import 'package:smart_soft/features/variation/views/bloc/button/button_cubit.dart';
 import 'package:smart_soft/features/variation/views/bloc/chest/chest_cubit.dart';
 import 'package:smart_soft/features/variation/views/bloc/collar/collar_cubit.dart';
@@ -26,8 +27,8 @@ import 'features/auth/views/blocs/register/register_cubit.dart';
 
 import 'features/onboarding/view/bloc/on_boarding_cubit.dart';
 import 'features/onboarding/view/screens/00_on_boarding_screen.dart';
-import 'features/seller/add_variation/views/blocs/seller_variations/seller_variations_cubit.dart';
 import 'features/seller/seller_home/views/blocs/seller_home/seller_home_cubit.dart';
+import 'features/seller/seller_variations/views/blocs/seller_variations/seller_variations_cubit.dart';
 import 'generated/codegen_loader.g.dart';
 
 void main() async {
@@ -76,6 +77,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => SellerVariationsCubit()),
         BlocProvider(create: (_) => OrderCubit()),
         BlocProvider(create: (_) => GetOrdersCubit()),
+        BlocProvider(create: (_) => AddVariationCubit()),
 
       ],
       child: Sizer(

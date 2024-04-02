@@ -14,7 +14,8 @@ class CartNavBar extends StatelessWidget {
   void Function()? onCheckoutClick;
   void Function()? onContinueShoppingClick;
   bool showContinueButton;
-  CartNavBar({super.key,this.showContinueButton = false,this.onCheckoutClick,this.onContinueShoppingClick});
+  bool isCheckoutActive;
+  CartNavBar({super.key,this.showContinueButton = false,this.onCheckoutClick,this.onContinueShoppingClick,this.isCheckoutActive = true});
 
   @override
   Widget build(BuildContext context) {
@@ -73,15 +74,15 @@ class CartNavBar extends StatelessWidget {
 
 
               MainButton(
-                color: AppTheme.primary900,
+                color: isCheckoutActive ? AppTheme.primary900 : AppTheme.neutral200,
                 width: 30.w,
                 height: 5.5.h,
                 label: Text(
                   LocaleKeys.check_out,
                   style: AppTheme.mainTextStyle(
-                      color: AppTheme.neutral100, fontSize: 11.sp),
+                      color: isCheckoutActive ? AppTheme.neutral100 : AppTheme.neutral500, fontSize: 11.sp),
                 ).tr(),
-                onTap: onCheckoutClick,
+                onTap: isCheckoutActive ? onCheckoutClick : null,
               ),
             ],
           ),

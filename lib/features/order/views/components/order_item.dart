@@ -65,8 +65,9 @@ class OrderItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+
                       Text(
-                        orderItemEntity.date.toString(),
+                        orderItemEntity.date?.substring(0,10) ?? '',
                         style: AppTheme.mainTextStyle(
                             color: AppTheme.neutral900, fontSize: 13.sp),
                       ),

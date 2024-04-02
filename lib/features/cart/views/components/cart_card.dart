@@ -24,7 +24,6 @@ class CartCard extends StatelessWidget {
         bottom: 2.h,
       ),
       width: double.infinity,
-      height: 18.h,
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(2.w),
@@ -49,7 +48,7 @@ class CartCard extends StatelessWidget {
                 fit: BoxFit.fitWidth,
                 AppImages.cloth,
                 width: 50.w,
-                height: 50.h,
+                height: 13.h,
               ),
           ),
 

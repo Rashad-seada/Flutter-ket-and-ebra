@@ -2,13 +2,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smart_soft/features/seller/add_variation/views/utils/variations_enum.dart';
 import 'package:smart_soft/generated/locale_keys.g.dart';
 
 import '../../../../../core/views/widgets/custom_header.dart';
 import '../../../../../core/views/widgets/space.dart';
 import '../blocs/seller_variations/seller_variations_cubit.dart';
 import '../components/seller_variants_category_item.dart';
+import '../utils/variations_enum.dart';
 
 class ViewVariationCategoriesScreen extends StatelessWidget {
   const ViewVariationCategoriesScreen({super.key});

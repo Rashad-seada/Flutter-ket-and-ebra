@@ -10,6 +10,7 @@ import 'package:smart_soft/features/cart/views/blocs/cart/cart_cubit.dart';
 import 'package:smart_soft/features/cart/views/components/cart_card.dart';
 
 import '../../../../core/config/app_images.dart';
+import '../../../../core/config/app_theme.dart';
 import '../../../../generated/locale_keys.g.dart';
 import '../components/cart_nav_bar.dart';
 
@@ -62,23 +63,55 @@ class _CartScreenState extends State<CartScreen> {
                 return Text(CartError.failure.message);
 
               } else if(state is CartSuccess){
-                return ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  padding: EdgeInsets.symmetric(horizontal: 7.w),
-                  itemCount: CartSuccess.cartResponse?.obj?.details?.length ?? 0,
-                  itemBuilder: (BuildContext context, int index) {
-                    return CartCard(
-                      price:
 
-                      (CartSuccess.cartResponse?.obj?.details?[index].buttonsPrice?.toDouble() ?? 0) +
-                      (CartSuccess.cartResponse?.obj?.details?[index].embroideryPrice?.toDouble() ?? 0 )+
-                      (CartSuccess.cartResponse?.obj?.details?[index].texturePrice?.toDouble() ?? 0 ),
+                if(CartSuccess.cartResponse?.obj?.details?.isNotEmpty ?? false){
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: EdgeInsets.symmetric(horizontal: 7.w),
+                    itemCount: CartSuccess.cartResponse?.obj?.details?.length ?? 0,
+                    itemBuilder: (BuildContext context, int index) {
+                      return CartCard(
+                        price:
 
-                      fabric:  CartSuccess.cartResponse?.obj?.details?[index].textureName.toString() ?? '--',
-                    );
-                  },
-                );
+                        (CartSuccess.cartResponse?.obj?.details?[index].buttonsPrice?.toDouble() ?? 0) +
+                            (CartSuccess.cartResponse?.obj?.details?[index].embroideryPrice?.toDouble() ?? 0 )+
+                            (CartSuccess.cartResponse?.obj?.details?[index].texturePrice?.toDouble() ?? 0 ),
+
+                        fabric:  CartSuccess.cartResponse?.obj?.details?[index].textureName.toString() ?? '--',
+                      );
+                    },
+                  );
+                }else {
+                  return Column(
+                    children: [
+
+
+                      Space(height: 25.h,),
+
+                      Image.asset( AppImages.empty,
+                        fit: BoxFit.fitHeight,
+                        width: 40.w,
+                        height: 30.w,
+                      ),
+
+                      Space(height: 3.h,),
+
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 15.w),
+                        child: Text(
+                          LocaleKeys.empty_cart_item,
+                          style: AppTheme.mainTextStyle(
+                            color: AppTheme.neutral500, fontSize: 12.sp,),
+                          textAlign: TextAlign.center,
+
+                        ).tr(),
+                      ),
+
+                    ],
+                  );
+
+                }
               }
 
               return SizedBox();
@@ -89,12 +122,19 @@ class _CartScreenState extends State<CartScreen> {
 
         ],
       ),
-      bottomNavigationBar: CartNavBar(
-        showContinueButton: widget.showContinueButton,
-        onCheckoutClick: () =>
-            context.read<CartCubit>().onCheckoutClick(context),
-        onContinueShoppingClick: () =>
-            context.read<CartCubit>().onContinueShoppingClick(context),
+      bottomNavigationBar: BlocConsumer<CartCubit,CartState>(
+      listener: (context, state) {},
+        builder: (context, state) {
+          return CartNavBar(
+              isCheckoutActive: CartSuccess.cartResponse?.obj?.details?.isNotEmpty ?? false,
+
+              showContinueButton: widget.showContinueButton,
+              onCheckoutClick: () =>
+                  context.read<CartCubit>().onCheckoutClick(context),
+              onContinueShoppingClick: () =>
+                  context.read<CartCubit>().onContinueShoppingClick(context),
+            );
+        },
       ),
     ));
   }

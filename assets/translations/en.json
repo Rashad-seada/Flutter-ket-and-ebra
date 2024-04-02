@@ -121,7 +121,10 @@
   "monthly_income": "Monthly income",
   "welcome_back": "Welcome back",
 
-  "empty_seller_item": "You have no items in this category, try adding at least one item so that the customers can order from you"
+  "empty_seller_item": "You have no items in this category, try adding at least one item so that the customers can order from you",
+  "empty_cart_item": "You have no items in the cart, try adding at least one item and it will appear in this page",
 
-
+  "image_pick": "Please tap here to pick up an image",
+  "name": "Name of the variant",
+  "description": "Description about the variant"
 }

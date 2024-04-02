@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:smart_soft/core/errors/failure.dart';
 import 'package:smart_soft/features/auth/domain/usecases/get_user_use_case.dart';
-import 'package:smart_soft/features/seller/add_variation/views/utils/variations_enum.dart';
 
 import '../../../../../../core/di/app_module.dart';
 import '../../../../../variation/domain/usecases/get_button_by_seller_id_use_case.dart';
@@ -15,8 +14,10 @@ import '../../../../../variation/domain/usecases/get_embroidery_by_seller_id_use
 import '../../../../../variation/domain/usecases/get_fabric_by_seller_id_use_case.dart';
 import '../../../../../variation/domain/usecases/get_front_pocket_by_seller_id_use_case.dart';
 import '../../../../../variation/domain/usecases/get_sleeve_by_seller_id_use_case.dart';
+import '../../../../add_variation/views/screens/add_variation_screen.dart';
 import '../../screens/view_variation_items_screen.dart';
 import '../../utils/seller_variation_model.dart';
+import '../../utils/variations_enum.dart';
 
 part 'seller_variations_state.dart';
 
@@ -34,6 +35,7 @@ class SellerVariationsCubit extends Cubit<SellerVariationsState> {
               emit(SellerVariationsError(error));
             },
             (success) {
+
               switch(variationsEnum){
                 case VariationsEnum.Fabric:
                   getFabric(context, int.tryParse(success.id ?? '') ?? 0);
@@ -120,7 +122,7 @@ class SellerVariationsCubit extends Cubit<SellerVariationsState> {
   getEmbroidery(BuildContext context,int sellerId){
     getIt<GetEmbroideryBySellerIdUseCase>().call(sellerId).then(
             (value) => value.fold(
-                (error) {
+            (error) {
               emit(SellerVariationsError(error));
 
             },
@@ -138,11 +140,11 @@ class SellerVariationsCubit extends Cubit<SellerVariationsState> {
   getFabric(BuildContext context,int sellerId){
     getIt<GetFabricBySellerIdUseCase>().call(sellerId).then(
             (value) => value.fold(
-                (error) {
+            (error) {
               emit(SellerVariationsError(error));
 
             },
-                (success) {
+            (success) {
                   emit(SellerVariationsSuccess(success.obj?.map((e) => SellerVariationModel(
                       name: e.name ?? '',
                       imageUrl: e.imgUrl ?? '',
@@ -184,6 +186,10 @@ class SellerVariationsCubit extends Cubit<SellerVariationsState> {
                   )).toList() ?? []));
             }
         ));
+  }
+
+  void onAddTap(BuildContext context,{required VariationsEnum variationsEnum}) {
+    Navigator.push(context, MaterialPageRoute(builder: (_)=> AddVariationScreen(variationsEnum: variationsEnum,)));
   }
 
 }

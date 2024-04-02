@@ -109,7 +109,11 @@ class CodegenLoader extends AssetLoader{
   "new_seller": "خياط جديد",
   "monthly_income": "الدخل الشهري",
   "welcome_back": "اهلا من جديد",
-  "empty_seller_item": "ليس لديك أي عناصر في هذا الفئة، حاول إضافة عنصر واحد على الأقل حتى يتمكن العملاء من طلب منك"
+  "empty_seller_item": "ليس لديك أي عناصر في هذا الفئة، حاول إضافة عنصر واحد على الأقل حتى يتمكن العملاء من طلب منك",
+  "empty_cart_item": "ليس لديك أي عناصر في العربة، حاول إضافة عنصر واحد على الأقل وسيظهر في هذه الصفحة",
+  "image_pick": "الرجاء النقر هنا لاختيار صورة",
+  "name": "اسم الاختيار",
+  "description": "وصف حول الاختيار"
 };
 static const Map<String,dynamic> en = {
   "on_boarding_title_1": "Digital Catalog",
@@ -206,7 +210,11 @@ static const Map<String,dynamic> en = {
   "new_seller": "New seller",
   "monthly_income": "Monthly income",
   "welcome_back": "Welcome back",
-  "empty_seller_item": "You have no items in this category, try adding at least one item so that the customers can order from you"
+  "empty_seller_item": "You have no items in this category, try adding at least one item so that the customers can order from you",
+  "empty_cart_item": "You have no items in the cart, try adding at least one item and it will appear in this page",
+  "image_pick": "Please tap here to pick up an image",
+  "name": "Name of the variant",
+  "description": "Description about the variant"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

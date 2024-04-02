@@ -5,13 +5,13 @@ import 'package:sizer/sizer.dart';
 import 'package:smart_soft/core/config/app_images.dart';
 import 'package:smart_soft/core/config/app_theme.dart';
 import 'package:smart_soft/core/views/widgets/custom_progress_indicator.dart';
-import 'package:smart_soft/features/seller/add_variation/views/components/seller_variants_item.dart';
-import 'package:smart_soft/features/seller/add_variation/views/utils/variations_enum.dart';
 import 'package:smart_soft/generated/locale_keys.g.dart';
 
 import '../../../../../core/views/widgets/custom_header.dart';
 import '../../../../../core/views/widgets/space.dart';
 import '../blocs/seller_variations/seller_variations_cubit.dart';
+import '../components/seller_variants_item.dart';
+import '../utils/variations_enum.dart';
 
 class ViewVariationItemsScreen extends StatefulWidget {
   VariationsEnum variationsEnum;
@@ -133,7 +133,7 @@ class _ViewVariationItemsScreenState extends State<ViewVariationItemsScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppTheme.primary900,
-        onPressed: () {  },
+        onPressed: () { context.read<SellerVariationsCubit>().onAddTap(context, variationsEnum: widget.variationsEnum); },
         child: Text("+",style: TextStyle(fontSize: 20.sp,color: AppTheme.neutral100),),
       ),
     ));

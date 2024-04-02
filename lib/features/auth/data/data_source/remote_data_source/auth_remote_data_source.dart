@@ -53,9 +53,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
       print(response.data);
 
-      if(response.statusCode! >= 500){
-        throw RemoteDataException("The was a server internal error");
-      }
 
 
       Map<String,dynamic> responseData = response.data;
@@ -85,10 +82,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
       print(response.data);
 
-      Map<String,dynamic> responseData = response.data;
+      print(response.data);
 
-
-      return RegisterCustomerResponse.fromJson(responseData);
+      return RegisterCustomerResponse.fromJson(response.data);
 
     } catch (e) {
       throw RemoteDataException(e.toString());

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smart_soft/features/seller/add_variation/views/utils/seller_variation_model.dart';
 
 import '../../../../../core/config/app_theme.dart';
+import '../utils/seller_variation_model.dart';
 
 class SellerVariantsItem extends StatelessWidget {
   SellerVariationModel sellerVariationModel;

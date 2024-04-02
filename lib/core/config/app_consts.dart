@@ -21,6 +21,15 @@ class AppConsts {
   static const String getFrontPocketEndPoint = "/ItemClothes/GetFrontPocketBySeller";
   static const String getSleeveEndPoint = "/ItemClothes/GetHandBySeller";
 
+
+  static const String createEmbroideryEndPoint = "/ItemClothes/CreateEmbroidery";
+  static const String createCollarEndPoint = "/ItemClothes/CreateYaka";
+  static const String createButtonEndPoint = "/ItemClothes/CreateButtons";
+  static const String createChestEndPoint = "/ItemClothes/CreateChest";
+  static const String createFabricEndPoint = "/ItemClothes/CreateTexture";
+  static const String createFrontPocketEndPoint = "/ItemClothes/CreateFrontPocket";
+  static const String createSleeveEndPoint = "/ItemClothes/CreateHand";
+
   //----- sellers end points -----
   static const String getAllSellersEndPoint = "/Users/GetAllSeller";
   static const String getSellersByLocationIdEndPoint = "/Users/GetSellersBycityId";

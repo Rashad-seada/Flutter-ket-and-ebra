@@ -2,7 +2,7 @@ class RegisterCustomerResponse {
   bool? isSuccssed;
   String? message;
   Obj? obj;
-  Null? errors;
+  dynamic? errors;
 
   RegisterCustomerResponse(
       {this.isSuccssed, this.message, this.obj, this.errors});
@@ -10,7 +10,7 @@ class RegisterCustomerResponse {
   RegisterCustomerResponse.fromJson(Map<String, dynamic> json) {
     isSuccssed = json['isSuccssed'];
     message = json['message'];
-    obj = json['obj'] != null ? new Obj.fromJson(json['obj']) : null;
+    obj = json['obj'] != null ? Obj.fromJson(json['obj']) : null;
     errors = json['errors'];
   }
 
@@ -38,7 +38,7 @@ class Obj {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['token'] = this.token;
     data['tokenExpire'] = this.tokenExpire;
     return data;

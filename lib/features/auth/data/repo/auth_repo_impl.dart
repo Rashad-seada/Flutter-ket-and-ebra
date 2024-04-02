@@ -68,7 +68,7 @@ class AuthRepoImpl implements AuthRepo {
 
       print("repo 1");
 
-      RegisterCustomerResponse registerCustomerResponse = await remoteDataSource.registerCustomer(username: username, phoneNumber: phoneNumber, password: password);
+      final registerCustomerResponse = await remoteDataSource.registerCustomer(username: username, phoneNumber: phoneNumber, password: password);
 
       print("repo 2");
       if (registerCustomerResponse.isSuccssed == false) {

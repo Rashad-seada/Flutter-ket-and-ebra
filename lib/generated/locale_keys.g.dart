@@ -96,5 +96,9 @@ abstract class  LocaleKeys {
   static const monthly_income = 'monthly_income';
   static const welcome_back = 'welcome_back';
   static const empty_seller_item = 'empty_seller_item';
+  static const empty_cart_item = 'empty_cart_item';
+  static const image_pick = 'image_pick';
+  static const name = 'name';
+  static const description = 'description';
 
 }
