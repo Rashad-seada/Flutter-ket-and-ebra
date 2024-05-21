@@ -21,7 +21,6 @@ class AppConsts {
   static const String getFrontPocketEndPoint = "/ItemClothes/GetFrontPocketBySeller";
   static const String getSleeveEndPoint = "/ItemClothes/GetHandBySeller";
 
-
   static const String createEmbroideryEndPoint = "/ItemClothes/CreateEmbroidery";
   static const String createCollarEndPoint = "/ItemClothes/CreateYaka";
   static const String createButtonEndPoint = "/ItemClothes/CreateButtons";
@@ -41,13 +40,27 @@ class AppConsts {
   static const String removeCartItemEndPoint = "/Cart/RemoveCart";
 
   //----- Admin ------
-  static const String getHomeEndPoint = "/Admin/GetHomeData";
-  static const String setHomeAdEndPoint = "/Admin/SetHomeAds";
+  static const String getHomeByAdminEndPoint = "/Admin/GetHomeData";
+  static const String setHomeAdByAdminEndPoint = "/Admin/SetHomeAds";
+  static const String deleteHomeAdByAdminEndPoint = "/Admin/DeleteHomeAds";
+  static const String getAdminHomeEndPoint = "/Admin/GetAdminHome";
+
+  static const String getRejectedSellersEndPoint = "/Admin/GetRejectedSeller";
+  static const String approveSellerEndPoint = "/Admin/ApproveSeller";
 
   //----- Order ------
   static const String createOrderEndPoint = "/ItemOrder/CreateOrder";
   static const String getAllOrdersEndPoint = "/ItemOrder/GetAllUserOrder";
 
+  //----- Seller Order -----
+  static const String getSellerOrdersEndPoint = "/Seller/GetAllSellerOrder";
+  static const String markOrderEndPoint = "/Seller/GetAllSellerOrder";
+  static const String getSellerVariantsEndPoint = "/Seller/GetMyVariants";
+  static const String deleteSellerVariantsEndPoint = "/ItemClothes/DeleteVariante";
+  static const String getSellerByIdEndPoint = "/Users/GetUserById";
+  static const String getLocationsEndPoint = "/Auth/GetAllCities";
+  static const String updateSellerDetailsEndPoint = "/Users/UpdateSellerDetails";
+  static const String uploadSellerImageEndPoint = "/Users/UploadSellerImg";
 
   //----- shared pref -----
   static const String boxName = "USER_BOX";

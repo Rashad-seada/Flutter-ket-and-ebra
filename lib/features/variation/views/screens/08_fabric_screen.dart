@@ -9,6 +9,7 @@ import 'package:smart_soft/features/variation/views/components/variant_nav_bar.d
 import 'package:smart_soft/generated/locale_keys.g.dart';
 
 import '../../../../core/config/app_consts.dart';
+import '../../../../core/views/widgets/custom_error_component.dart';
 import '../../../../core/views/widgets/custom_progress_indicator.dart';
 import '../../../../core/views/widgets/space.dart';
 import '../components/fabric_card.dart';
@@ -58,10 +59,15 @@ class _FabricScreenState extends State<FabricScreen> {
               return CustomProgressIndicator();
 
               } else if(state is FabricError) {
-              Text(VariationError.error.message);
+
+                return CustomErrorComponent(
+                  errorMessage: FabricError.error.message,onTap: (){
+                  context.read<FabricCubit>().getFabric(context);
+                },);
 
               } else if(state is FabricSuccess) {
                 return ListView(
+                  physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   children: [
 
@@ -69,7 +75,8 @@ class _FabricScreenState extends State<FabricScreen> {
 
 
                     ListView.builder(
-                      shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
                         itemCount: FabricSuccess.fabrics.length,
                         itemBuilder: (context,index){
                           // FabricSuccess.fabrics[index].
@@ -79,8 +86,10 @@ class _FabricScreenState extends State<FabricScreen> {
                            description: FabricSuccess.fabrics[index].description ?? 'unKnown',
                            price: FabricSuccess.fabrics[index].price ?? 0.0,
                            onTap: () {
+
                              context.read<FabricCubit>().onFabricCardTap(FabricSuccess.fabrics[index].id ?? -1,context);
-                           } ,
+
+                           },
                          );
                     }),
 

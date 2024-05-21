@@ -1,4 +1,4 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter_network_connectivity/flutter_network_connectivity.dart';
 import '../../errors/exception.dart';
 
 abstract class NetworkService {
@@ -14,15 +14,17 @@ class NetworkServiceImpl implements NetworkService {
   Future<bool> get isConnected async {
     try {
 
-      final connectivityResult = await Connectivity().checkConnectivity();
+      FlutterNetworkConnectivity _flutterNetworkConnectivity =
+      FlutterNetworkConnectivity(
+        isContinousLookUp: true,
+      );
 
-      if(connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi){
-        return true;
-      } else {
-        return false;
-      }
+      return
+      _flutterNetworkConnectivity.isInternetConnectionAvailable();
+
+
     } catch (e) {
-      throw ServiceException("There was unexpected error, please try again");
+      throw ServiceException("حدث خطا اثناء التحقق من الشبكه. يرجى اعاده المحاوله");
     }
   }
 

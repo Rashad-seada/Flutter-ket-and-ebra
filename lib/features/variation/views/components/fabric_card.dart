@@ -10,7 +10,7 @@ class FabricCard extends StatelessWidget {
   String imgUrl;
   String name;
   String description;
-  double price;
+  num price;
   void Function()? onTap;
   FabricCard({super.key,required this.imgUrl ,required this.name,required this.description,required this.price, required this.onTap});
 

@@ -7,6 +7,7 @@ import 'package:smart_soft/features/order/views/blocs/get_orders/get_orders_cubi
 import 'package:smart_soft/features/order/views/components/order_item.dart';
 import 'package:smart_soft/features/seller/seller_home/views/components/order_card.dart';
 
+import '../../../../core/views/widgets/custom_error_component.dart';
 import '../../../../core/views/widgets/custom_header.dart';
 import '../../../../core/views/widgets/space.dart';
 import '../../../../generated/locale_keys.g.dart';
@@ -57,7 +58,11 @@ class _OrdersScreenState extends State<OrdersScreen> {
                     return CustomProgressIndicator();
 
                   }else if(state is GetOrdersError){
-                    return Text(GetOrdersError.failure.message);
+                    return CustomErrorComponent(
+                      errorMessage: GetOrdersError.failure.message,onTap: (){
+                      context.read<GetOrdersCubit>().getOrder();
+                    },);
+
                   }
                   else if(state is GetOrdersSuccess){
                     return ListView.builder(

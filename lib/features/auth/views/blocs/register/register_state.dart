@@ -17,4 +17,8 @@ class RegisterError extends RegisterState {
 
 class RegisterLoading extends RegisterState {}
 
+class RegisterGettingCities extends RegisterState {}
+
+class RegisterGettingCitiesError extends RegisterState {}
+
 class RegisterPickPhoto extends RegisterState {}

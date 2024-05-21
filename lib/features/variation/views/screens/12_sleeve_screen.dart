@@ -7,13 +7,13 @@ import 'package:smart_soft/features/variation/views/bloc/sleeve/sleeve_cubit.dar
 
 import '../../../../core/config/app_consts.dart';
 import '../../../../core/config/app_images.dart';
+import '../../../../core/config/app_theme.dart';
+import '../../../../core/views/widgets/custom_error_component.dart';
 import '../../../../core/views/widgets/custom_header.dart';
 import '../../../../core/views/widgets/custom_progress_indicator.dart';
 import '../../../../core/views/widgets/space.dart';
 import '../../../../generated/locale_keys.g.dart';
-import '../bloc/variation/variation_cubit.dart';
 import '../components/variant_card.dart';
-import '../components/variant_nav_bar.dart';
 
 class SleeveScreen extends StatefulWidget {
   const SleeveScreen({super.key});
@@ -51,16 +51,7 @@ class _SleeveScreenState extends State<SleeveScreen> {
             height: 3.h,
           ),
 
-          SvgPicture.asset(
-            fit: BoxFit.fitWidth,
-            AppImages.cloth,
-            width: 100.w,
-            height: 38.h,
-          ),
 
-          Space(
-            height: 3.h,
-          ),
 
           BlocConsumer<SleeveCubit, SleeveState>(
             listener: (context, state) {
@@ -72,30 +63,54 @@ class _SleeveScreenState extends State<SleeveScreen> {
               return CustomProgressIndicator();
 
               } else if(state is SleeveError){
-              return Text(SleeveError.error.message);
+
+                return CustomErrorComponent(
+                  errorMessage: SleeveError.error.message,onTap: (){
+                  context.read<SleeveCubit>().getSleeve(context);
+                },);
 
               } else if(state is SleeveSuccess){
-              return GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                padding: EdgeInsets.symmetric(horizontal: 7.w),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3, // Number of columns
-                  crossAxisSpacing: 3.w, // Spacing between columns
-                  mainAxisSpacing: 3.w, // Spacing between rows
-                ),
-                //padding: EdgeInsets.all(10.0), // Padding around the GridView
-                itemCount: SleeveSuccess.sleeves.length,
-                // Number of items
-                itemBuilder: (BuildContext context, int index) {
-                  // Function that returns a widget for each item
-                  return VariantCard(
-                    isSelect: index == 0,
-                    title: SleeveSuccess.sleeves[index].name ?? "Unknown",
-                    imgUrl: AppConsts.imgUrl + SleeveSuccess.sleeves[index].imgUrl.toString(),
-                    onTap: ()=> context.read<SleeveCubit>().onSleeveTap(SleeveSuccess.sleeves[index].id ?? -1, context),
-                  );
-                },
+              return Column(
+                children: [
+
+                  Space(
+                    height: 3.h,
+                  ),
+
+                  SvgPicture.asset(
+                    fit: BoxFit.fitHeight,
+                    AppImages.cloth,
+                    width: 100.w,
+                    height: 30.h,
+                    color: AppTheme.neutral400,
+                  ),
+
+                  Space(
+                    height: 5.h,
+                  ),
+                  GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: EdgeInsets.symmetric(horizontal: 7.w),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3, // Number of columns
+                      crossAxisSpacing: 3.w, // Spacing between columns
+                      mainAxisSpacing: 3.w, // Spacing between rows
+                    ),
+                    //padding: EdgeInsets.all(10.0), // Padding around the GridView
+                    itemCount: SleeveSuccess.sleeves.length,
+                    // Number of items
+                    itemBuilder: (BuildContext context, int index) {
+                      // Function that returns a widget for each item
+                      return VariantCard(
+                        isSelect: index == 0,
+                        title: SleeveSuccess.sleeves[index].name ?? "Unknown",
+                        imgUrl: AppConsts.imgUrl + SleeveSuccess.sleeves[index].imgUrl.toString(),
+                        onTap: ()=> context.read<SleeveCubit>().onSleeveTap(SleeveSuccess.sleeves[index].id ?? -1, context),
+                      );
+                    },
+                  ),
+                ],
               );}
 
               return SizedBox();

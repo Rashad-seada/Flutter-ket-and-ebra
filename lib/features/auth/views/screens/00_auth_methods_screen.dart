@@ -134,18 +134,6 @@ class AuthMethodsScreen extends StatelessWidget {
               height: 3.h,
             ),
 
-            MainButton(
-              width: 86.w,
-              height: 6.5.h,
-              border: Border.all(color: AppTheme.primary900,width: 0.2.w),
-              color: Colors.transparent,
-              label: Text(
-                LocaleKeys.register_admin,
-                style: AppTheme.mainTextStyle(
-                    color: AppTheme.primary900, fontSize: 13.sp),
-              ).tr(),
-              onTap: ()=> navigateToRegisterAdminScreen(context),
-            ),
           ],
         ),
       ),

@@ -27,7 +27,12 @@ class CartRepoImpl implements CartRepo {
     }
 
     final cartEntity = await remoteDataSource.addToCart(token: token, sellerId: sellerId, length: length, shoulder: shoulder, sleeves: sleeves, chest: chest, neck: neck, hand: hand, cuff: cuff, fabricId: fabricId, collarId: collarId, chestId: chestId, frontPocketId: frontPocketId, sleeveId: sleeveId, buttonId: buttonId, embroideryId: embroideryId);
-
+    if(cartEntity.isSuccssed != true){
+      return left(ServiceFailure(
+          cartEntity.message.toString(),
+          failureCode: 0
+      ));
+    }
     return right(cartEntity);
 
     }on RemoteDataException catch (e){
@@ -53,7 +58,12 @@ class CartRepoImpl implements CartRepo {
       }
 
       final cartEntity = await remoteDataSource.getCart(token);
-
+      if(cartEntity.isSuccssed != true){
+        return left(ServiceFailure(
+            cartEntity.message.toString(),
+            failureCode: 0
+        ));
+      }
       return right(cartEntity);
 
     }on RemoteDataException catch (e){
@@ -78,7 +88,15 @@ class CartRepoImpl implements CartRepo {
         ));
       }
 
+
       final cartEntity = await remoteDataSource.removeFromCart(token: token, cartItemId: cartItemId);
+
+      if(cartEntity.isSuccssed != true){
+        return left(ServiceFailure(
+            cartEntity.message.toString(),
+            failureCode: 0
+        ));
+      }
 
       return right(cartEntity);
 
@@ -105,7 +123,12 @@ class CartRepoImpl implements CartRepo {
       }
 
       final cartEntity = await remoteDataSource.removeFromCart(token: token, cartItemId: cartItemId);
-
+      if(cartEntity.isSuccssed != true){
+        return left(ServiceFailure(
+            cartEntity.message.toString(),
+            failureCode: 0
+        ));
+      }
       return right(cartEntity);
 
     }on RemoteDataException catch (e){

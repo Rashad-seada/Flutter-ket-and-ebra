@@ -77,8 +77,11 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
         "handId": sleeveId,
         "buttonsId": buttonId,
         "embroideryId": embroideryId,
-        "sellerrId": sellerId
+        "sellerId": sellerId
       };
+      print("token : "+token);
+
+      print("Resquest : "+requestData.toString());
 
       final response = await _client.post(
           AppConsts.url + AppConsts.addToCartEndPoint,
@@ -87,13 +90,10 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
             "Authorization": "Bearer $token"
           }
       );
-
-      if(response.statusCode! >= 400){
-        throw RemoteDataException("The was a server internal error");
-      }
+      print("Response : "+response.data.runtimeType.toString());
 
 
-      Map<String,dynamic> responseData = response.data;
+      Map<String,dynamic> responseData = response.data ;
 
       return CartResponse.fromJson(responseData,);
 
@@ -118,11 +118,12 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
       }
 
       Map<String,dynamic> responseData = response.data;
+      print(response.data);
 
       return CartResponse.fromJson(responseData,);
 
     } catch (e) {
-      throw RemoteDataException(e.toString());
+      throw RemoteDataException("حدث خطا غير متوقع. يرجى اعاده المحاوله");
     }
   }
 
@@ -130,17 +131,18 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
   Future<CartResponse> removeFromCart({required String token, required String cartItemId}) async  {
     try {
 
-      Map<String,dynamic> requestData = {
-        "CartDetailId": cartItemId,
-      };
-
       final response = await _client.delete(
           AppConsts.url + AppConsts.removeCartItemEndPoint,
-          data: requestData,
+          queryParameters: {
+            "CartDetailId": cartItemId,
+          },
           headers: {
             "Authorization": "Bearer $token"
           }
       );
+
+      print(response.data);
+
 
       if(response.statusCode! >= 400){
         throw RemoteDataException("The was a server internal error");
@@ -148,11 +150,12 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
 
 
       Map<String,dynamic> responseData = response.data;
+      print(response.data);
 
       return CartResponse.fromJson(responseData,);
 
     } catch (e) {
-      throw RemoteDataException(e.toString());
+      throw RemoteDataException("حدث خطا غير متوقع. يرجى اعاده المحاوله");
     }
   }
 
@@ -192,11 +195,12 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
 
 
       Map<String,dynamic> responseData = response.data;
+      print(response.data);
 
       return CartResponse.fromJson(responseData,);
 
     } catch (e) {
-      throw RemoteDataException(e.toString());
+      throw RemoteDataException("حدث خطا غير متوقع. يرجى اعاده المحاوله");
     }
   }
 

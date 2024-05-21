@@ -7,6 +7,8 @@ import 'package:smart_soft/features/variation/views/bloc/chest/chest_cubit.dart'
 
 import '../../../../core/config/app_consts.dart';
 import '../../../../core/config/app_images.dart';
+import '../../../../core/config/app_theme.dart';
+import '../../../../core/views/widgets/custom_error_component.dart';
 import '../../../../core/views/widgets/custom_header.dart';
 import '../../../../core/views/widgets/custom_progress_indicator.dart';
 import '../../../../core/views/widgets/space.dart';
@@ -50,16 +52,7 @@ class _ChestScreenState extends State<ChestScreen> {
             height: 3.h,
           ),
 
-          SvgPicture.asset(
-            fit: BoxFit.fitWidth,
-            AppImages.cloth,
-            width: 100.w,
-            height: 38.h,
-          ),
 
-          Space(
-            height: 3.h,
-          ),
 
           BlocBuilder<ChestCubit, ChestState>(
             builder: (context, state) {
@@ -68,30 +61,55 @@ class _ChestScreenState extends State<ChestScreen> {
               return CustomProgressIndicator();
 
               } else if(state is ChestError){
-              return Text(ChestError.error.message);
+
+                return CustomErrorComponent(
+                  errorMessage: ChestError.error.message,onTap: (){
+                  context.read<ChestCubit>().getChest(context);
+                },);
 
               } else if(state is ChestSuccess){
-              return GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                padding: EdgeInsets.symmetric(horizontal: 7.w),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3, // Number of columns
-                  crossAxisSpacing: 3.w, // Spacing between columns
-                  mainAxisSpacing: 3.w, // Spacing between rows
-                ),
-                //padding: EdgeInsets.all(10.0), // Padding around the GridView
-                itemCount: ChestSuccess.chests.length,
-                // Number of items
-                itemBuilder: (BuildContext context, int index) {
-                  // Function that returns a widget for each item
-                  return VariantCard(
-                    isSelect: index == 0, 
-                    title: ChestSuccess.chests[index].name ?? "Unknown",
-                    imgUrl: AppConsts.imgUrl + ChestSuccess.chests[index].imgUrl.toString(),
-                    onTap: ()=> context.read<ChestCubit>().onChestTap(ChestSuccess.chests[index].id ?? -1, context),
-                  );
-                },
+              return Column(
+                children: [
+
+                  Space(
+                    height: 3.h,
+                  ),
+
+                  SvgPicture.asset(
+                    fit: BoxFit.fitHeight,
+                    AppImages.cloth,
+                    width: 100.w,
+                    height: 30.h,
+                    color: AppTheme.neutral400,
+                  ),
+
+                  Space(
+                    height: 5.h,
+                  ),
+
+                  GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: EdgeInsets.symmetric(horizontal: 7.w),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3, // Number of columns
+                      crossAxisSpacing: 3.w, // Spacing between columns
+                      mainAxisSpacing: 3.w, // Spacing between rows
+                    ),
+                    //padding: EdgeInsets.all(10.0), // Padding around the GridView
+                    itemCount: ChestSuccess.chests.length,
+                    // Number of items
+                    itemBuilder: (BuildContext context, int index) {
+                      // Function that returns a widget for each item
+                      return VariantCard(
+                        isSelect: index == 0,
+                        title: ChestSuccess.chests[index].name ?? "Unknown",
+                        imgUrl: AppConsts.imgUrl + ChestSuccess.chests[index].imgUrl.toString(),
+                        onTap: ()=> context.read<ChestCubit>().onChestTap(ChestSuccess.chests[index].id ?? -1, context),
+                      );
+                    },
+                  ),
+                ],
               );}
 
               return SizedBox();

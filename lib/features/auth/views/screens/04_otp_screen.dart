@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
+import 'package:smart_soft/features/auth/utils/register_type.dart';
 import 'package:smart_soft/features/auth/views/blocs/otp/otp_cubit.dart';
 import 'package:smart_soft/features/auth/views/blocs/reset_password/reset_password_cubit.dart';
 import 'package:smart_soft/features/auth/views/widgets/pin_text_field.dart';
@@ -20,8 +21,8 @@ import '../blocs/login/login_cubit.dart';
 class OtpScreen extends StatefulWidget {
 
   String phoneNumber;
-
-  OtpScreen({super.key,required this.phoneNumber});
+  RegisterType registerType;
+  OtpScreen({super.key,required this.phoneNumber, required this.registerType});
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -82,7 +83,7 @@ class _OtpScreenState extends State<OtpScreen> {
               child: PinTextField(
                 onChange: context.read<OtpCubit>().onPinChange,
                 validator: (_)=> context.read<OtpCubit>().validatePin(),
-                onCompleted: (pin)=> context.read<OtpCubit>().onConfirmClick(context),
+                onCompleted: (pin)=> context.read<OtpCubit>().onConfirmClick(context,widget.registerType),
               ),
             ),
 
@@ -135,7 +136,7 @@ class _OtpScreenState extends State<OtpScreen> {
                     style: AppTheme.mainTextStyle(
                         color: AppTheme.neutral100, fontSize: 13.sp),
                   ).tr(),
-                  onTap: () => context.read<OtpCubit>().onConfirmClick(context),
+                  onTap: () => context.read<OtpCubit>().onConfirmClick(context,widget.registerType),
                 );
               },
             ),

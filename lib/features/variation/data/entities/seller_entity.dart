@@ -1,5 +1,6 @@
 class SellerEntity {
   int? comNo;
+  String? name;
   int? taxNo;
   String? profileImg;
   String? phoneNumber;
@@ -8,6 +9,7 @@ class SellerEntity {
 
   SellerEntity(
       {this.comNo,
+        this.name,
         this.taxNo,
         this.profileImg,
         this.phoneNumber,
@@ -16,6 +18,7 @@ class SellerEntity {
 
   SellerEntity.fromJson(Map<String, dynamic> json) {
     comNo = json['comNo'];
+    name = json['name'];
     taxNo = json['taxNo'];
     profileImg = json['profileImg'];
     phoneNumber = json['phoneNumber'];
@@ -26,6 +29,7 @@ class SellerEntity {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['comNo'] = this.comNo;
+    data['name'] = this.name;
     data['taxNo'] = this.taxNo;
     data['profileImg'] = this.profileImg;
     data['phoneNumber'] = this.phoneNumber;

@@ -28,6 +28,13 @@ class AddVariationCubit extends Cubit<AddVariationState> {
   TextEditingController descriptionController = TextEditingController();
   TextEditingController priceController = TextEditingController();
 
+  void clear() {
+    selectedImage = null;
+    nameController.text = '';
+    descriptionController.text = '';
+    priceController.text = '';
+  }
+
   onImageSelectionTap() async {
     emit(AddVariationSelectingImage());
     selectedImage = await getIt<ImagePickerService>().pickImageFromGallery();
@@ -58,13 +65,23 @@ class AddVariationCubit extends Cubit<AddVariationState> {
     emit(AddVariationInitial());
   }
 
-  onAddClick(BuildContext context, VariationsEnum variationsEnum) {
-    if(formKey.currentState!.validate()){
-      addVariant(context,variationsEnum);
+  Future<void> onAddClick(BuildContext context, VariationsEnum variationsEnum) async {
+
+    if(selectedImage == null) {
+      showFlushBar(
+          context,
+          title: "Validation error",
+          message : "Please select an image for your variant"
+      );
+
+    } else if(formKey.currentState!.validate() ){
+      await addVariant(context,variationsEnum);
+
     }
+
   }
 
-  addVariant(BuildContext context, VariationsEnum variationsEnum){
+  addVariant(BuildContext context, VariationsEnum variationsEnum) async {
     switch(variationsEnum){
       case VariationsEnum.Fabric:
         return createFabric(context);
@@ -143,11 +160,11 @@ class AddVariationCubit extends Cubit<AddVariationState> {
           emit(AddVariationError());
 
         },
-            (success) {
+        (success) {
           Navigator.pop(context);
           emit(AddVariationSuccess());
 
-            }
+        }
     )
     );
   }
@@ -157,12 +174,12 @@ class AddVariationCubit extends Cubit<AddVariationState> {
     getIt<CreateEmbroideryUseCase>().call(title: nameController.text, description: nameController.text,image: selectedImage, price: double.tryParse(priceController.text) ?? 0 )
         .then((value) => value.fold(
             (error) {
-          showFlushBar(
-              context,
-              title: "Error ${error.failureCode}",
-              message : error.message
-          );
-          emit(AddVariationError());
+              showFlushBar(
+                  context,
+                  title: "Error ${error.failureCode}",
+                  message : error.message
+              );
+              emit(AddVariationError());
 
             },
             (success) {
@@ -174,7 +191,7 @@ class AddVariationCubit extends Cubit<AddVariationState> {
 
   createFabric(BuildContext context){
     emit(AddVariationIsLoading());
-    getIt<CreateFabricUseCase>().call(title: nameController.text, description: nameController.text,image: selectedImage, price: double.tryParse(priceController.text) ?? 0 )
+    getIt<CreateFabricUseCase>().call(title: nameController.text, description: nameController.text,image: selectedImage, price: double.tryParse(priceController.text) ?? 0.0 )
         .then((value) => value.fold(
             (error) {
           showFlushBar(
@@ -231,6 +248,8 @@ class AddVariationCubit extends Cubit<AddVariationState> {
     })
     );
   }
+
+
 
 
 }

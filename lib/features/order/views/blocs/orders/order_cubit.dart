@@ -37,6 +37,10 @@ class OrderCubit extends Cubit<OrderState> {
             (success) {
               emit(OrderSuccess(allCitiesResponse: success));
               selectedCity = OrderSuccess.allCitiesResponse!.obj![0];
+
+              success.obj?.forEach((element) {
+                print(element.name);
+              });
             }
     ));
   }
@@ -88,11 +92,11 @@ class OrderCubit extends Cubit<OrderState> {
   }
 
   _navigateToPaymentMessageScreen(BuildContext context){
-    Navigator.push(context,MaterialPageRoute(builder: (_)=>  PaymentMessageScreen()) );
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>  PaymentMessageScreen()), (route) => false);
   }
 
   _navigateToHomeScreen(BuildContext context){
-    Navigator.push(context,MaterialPageRoute(builder: (_)=>  HomeScreen()) );
+    Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (_)=>  HomeScreen()) , (route) => false);
   }
 
 }

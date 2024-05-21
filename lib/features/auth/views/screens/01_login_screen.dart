@@ -14,6 +14,7 @@ import '../../../../core/views/widgets/custom_back_button.dart';
 import '../../../../core/views/widgets/main_button.dart';
 import '../../../../core/views/widgets/space.dart';
 import '../../../../generated/locale_keys.g.dart';
+import '../../utils/register_type.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -71,8 +72,6 @@ class LoginScreen extends StatelessWidget {
                 Space(
                   height: 0.5.h,
                 ),
-
-
                 CustomTextField(
                   controller: context.read<LoginCubit>().phoneNumberController,
                   validator: (_)=> context.read<LoginCubit>().validatePhone(),
@@ -86,6 +85,7 @@ class LoginScreen extends StatelessWidget {
                     ),
 
                   ),
+                  keyboardType: TextInputType.number,
                   hint: LocaleKeys.phone_number_hint.tr(),
                 ),
                 Space(
@@ -136,7 +136,7 @@ class LoginScreen extends StatelessWidget {
                 ),
 
                 InkWell(
-                  onTap: () => context.read<LoginCubit>().onForgotPasswordClick(context) ,
+                  onTap: () => context.read<LoginCubit>().onForgotPasswordClick(context,RegisterType.RegisterCustomer) ,
                   child: Text(
                     LocaleKeys.forgot_password.tr(),
                     style: AppTheme.mainTextStyle(

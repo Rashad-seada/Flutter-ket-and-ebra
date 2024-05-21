@@ -11,6 +11,7 @@ import 'package:smart_soft/features/cart/views/components/cart_card.dart';
 
 import '../../../../core/config/app_images.dart';
 import '../../../../core/config/app_theme.dart';
+import '../../../../core/views/widgets/custom_error_component.dart';
 import '../../../../generated/locale_keys.g.dart';
 import '../components/cart_nav_bar.dart';
 
@@ -60,7 +61,11 @@ class _CartScreenState extends State<CartScreen> {
                 return CustomProgressIndicator();
 
               } else if(state is CartError){
-                return Text(CartError.failure.message);
+
+                return CustomErrorComponent(
+                  errorMessage: CartError.failure.message,onTap: (){
+                  context.read<CartCubit>().getCart();
+                },);
 
               } else if(state is CartSuccess){
 
@@ -72,13 +77,7 @@ class _CartScreenState extends State<CartScreen> {
                     itemCount: CartSuccess.cartResponse?.obj?.details?.length ?? 0,
                     itemBuilder: (BuildContext context, int index) {
                       return CartCard(
-                        price:
-
-                        (CartSuccess.cartResponse?.obj?.details?[index].buttonsPrice?.toDouble() ?? 0) +
-                            (CartSuccess.cartResponse?.obj?.details?[index].embroideryPrice?.toDouble() ?? 0 )+
-                            (CartSuccess.cartResponse?.obj?.details?[index].texturePrice?.toDouble() ?? 0 ),
-
-                        fabric:  CartSuccess.cartResponse?.obj?.details?[index].textureName.toString() ?? '--',
+                        details: CartSuccess.cartResponse!.obj!.details![index],
                       );
                     },
                   );
@@ -104,13 +103,10 @@ class _CartScreenState extends State<CartScreen> {
                           style: AppTheme.mainTextStyle(
                             color: AppTheme.neutral500, fontSize: 12.sp,),
                           textAlign: TextAlign.center,
-
                         ).tr(),
                       ),
-
                     ],
                   );
-
                 }
               }
 

@@ -8,6 +8,8 @@ import 'package:smart_soft/features/variation/views/components/embroidery_card.d
 
 import '../../../../core/config/app_consts.dart';
 import '../../../../core/config/app_images.dart';
+import '../../../../core/config/app_theme.dart';
+import '../../../../core/views/widgets/custom_error_component.dart';
 import '../../../../core/views/widgets/custom_header.dart';
 import '../../../../core/views/widgets/custom_progress_indicator.dart';
 import '../../../../core/views/widgets/space.dart';
@@ -52,16 +54,7 @@ class _EmbroideryScreenState extends State<EmbroideryScreen> {
             height: 3.h,
           ),
 
-          SvgPicture.asset(
-            fit: BoxFit.fitWidth,
-            AppImages.cloth,
-            width: 100.w,
-            height: 38.h,
-          ),
 
-          Space(
-            height: 3.h,
-          ),
 
           BlocConsumer<EmbroideryCubit, EmbroideryState>(
             listener: (context, state) {},
@@ -71,23 +64,47 @@ class _EmbroideryScreenState extends State<EmbroideryScreen> {
               return CustomProgressIndicator();
 
               } else if(state is EmbroideryError){
-              return Text(EmbroideryError.error.message);
+                return CustomErrorComponent(
+                  errorMessage: EmbroideryError.error.message,onTap: (){
+                  context.read<EmbroideryCubit>().getEmbroidery(context);
+                },);
 
-              } else if(state is EmbroiderySuccess){}
-              return ListView.builder(
-                shrinkWrap: true,
-                itemCount: EmbroiderySuccess.embroiderys.length,
-                physics: const NeverScrollableScrollPhysics(),
-                padding: EdgeInsets.symmetric(horizontal: 7.w),
-                itemBuilder: (BuildContext context, int index) {
-                  return EmbroideryCard(
-                    title: EmbroiderySuccess.embroiderys[index].name ?? "Unknown",
-                    imgUrl: AppConsts.imgUrl + EmbroiderySuccess.embroiderys[index].imgUrl.toString(),
-                    price: EmbroiderySuccess.embroiderys[index].price ?? 0,
-                    onTap: ()=> context.read<EmbroideryCubit>().onEmbroideryTap(EmbroiderySuccess.embroiderys[index].id ?? -1, context),
-                  );
+              } else if(state is EmbroiderySuccess){
 
-                },
+              }
+              return Column(
+                children: [
+                  Space(
+                    height: 3.h,
+                  ),
+
+                  SvgPicture.asset(
+                    fit: BoxFit.fitHeight,
+                    AppImages.cloth,
+                    width: 100.w,
+                    height: 30.h,
+                    color: AppTheme.neutral400,
+                  ),
+
+                  Space(
+                    height: 5.h,
+                  ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: EmbroiderySuccess.embroiderys.length,
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: EdgeInsets.symmetric(horizontal: 7.w),
+                    itemBuilder: (BuildContext context, int index) {
+                      return EmbroideryCard(
+                        title: EmbroiderySuccess.embroiderys[index].name ?? "Unknown",
+                        imgUrl: AppConsts.imgUrl + EmbroiderySuccess.embroiderys[index].imgUrl.toString(),
+                        price: EmbroiderySuccess.embroiderys[index].price ?? 0,
+                        onTap: ()=> context.read<EmbroideryCubit>().onEmbroideryTap(EmbroiderySuccess.embroiderys[index].id ?? -1, context),
+                      );
+
+                    },
+                  ),
+                ],
               );
             },
           ),

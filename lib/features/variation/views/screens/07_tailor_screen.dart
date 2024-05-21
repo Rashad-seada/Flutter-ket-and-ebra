@@ -10,6 +10,7 @@ import 'package:smart_soft/features/variation/views/components/variant_nav_bar.d
 import 'package:smart_soft/generated/locale_keys.g.dart';
 
 import '../../../../core/config/app_consts.dart';
+import '../../../../core/views/widgets/custom_error_component.dart';
 import '../../../../core/views/widgets/space.dart';
 import '../components/fabric_card.dart';
 import '../components/tailor_card.dart';
@@ -50,12 +51,12 @@ class _TailorScreenState extends State<TailorScreen> {
               height: 3.h,
             ),
 
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 6.5.w),
-              child: TailorFilterCard(
-                onTap: () {},
-              ),
-            ),
+            // Padding(
+            //   padding: EdgeInsets.symmetric(horizontal: 6.5.w),
+            //   child: TailorFilterCard(
+            //     onTap: () {},
+            //   ),
+            // ),
 
             Space(
               height: 3.h,
@@ -69,7 +70,11 @@ class _TailorScreenState extends State<TailorScreen> {
                   return CustomProgressIndicator();
 
                 } else if(state is VariationError) {
-                  Text(VariationError.error.message);
+
+                  return CustomErrorComponent(
+                    errorMessage: VariationError.error.message,onTap: (){
+                    context.read<VariationCubit>().getAllSeller();
+                  },);
 
                 } else if(state is VariationSuccess || state is VariationInitial){
                   return ListView.builder(
@@ -78,7 +83,7 @@ class _TailorScreenState extends State<TailorScreen> {
                       itemCount: VariationSuccess.sellers.length,
                       itemBuilder: (context,index){
                         return TailorCard(
-                          name: VariationSuccess.sellers[index].id.toString() ?? "unKnown",
+                          name: VariationSuccess.sellers[index].name?? "unKnown",
                           imgUrl: AppConsts.imgUrl + VariationSuccess.sellers[index].profileImg.toString(),
                           rating: 5, onTap: () {
                           context.read<VariationCubit>().onSellerCardTap(VariationSuccess.sellers[index].id ?? -1, context);

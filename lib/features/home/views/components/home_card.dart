@@ -60,36 +60,7 @@ class HomeCard extends StatelessWidget {
                     color: AppTheme.neutral900, fontSize: 16.sp),
               ).tr(),
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 65.h),
-              child: MainButton(
-                color: AppTheme.neutral900.withOpacity(0.8),
-                width: 65.w,
-                height: 6.h,
-                label: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset(
-                      AppImages.ctaArrow,
-                      width: 5.w,
-                      height: 5.w,
-                    ),
-                    Space(
-                      width: 2.w,
-                    ),
-                    Text(
-                      LocaleKeys.make_your_design,
-                      style: AppTheme.mainTextStyle(
-                          color: AppTheme.neutral100, fontSize: 11.sp),
-                    ).tr(),
-                  ],
-                ),
-                onTap: () {
-                  context.read<HomeCubit>().navigateToVariation(context);
-                },
-              ),
-            ),
+
           ],
         ),
       ),

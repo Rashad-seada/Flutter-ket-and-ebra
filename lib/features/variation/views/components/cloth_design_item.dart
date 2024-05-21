@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:smart_soft/core/config/app_consts.dart';
+import 'package:smart_soft/core/config/app_images.dart';
 import 'package:smart_soft/core/views/widgets/custom_network_image.dart';
 import 'package:smart_soft/core/views/widgets/space.dart';
 
@@ -42,7 +44,7 @@ class ClothDesignItem extends StatelessWidget {
           Row(
             children: [
               Text(
-                "title",
+                designModel.type,
                 style: AppTheme.mainTextStyle(
                     color: AppTheme.neutral900, fontSize: 11.sp),
               ),
@@ -52,7 +54,7 @@ class ClothDesignItem extends StatelessWidget {
               CustomNetworkImage(
                   height: 3.h,
                   width: 3.h,
-                  url: "",
+                  url: AppConsts.imgUrl + designModel.image,
               ),
             ],
           )

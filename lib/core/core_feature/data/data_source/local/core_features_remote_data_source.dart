@@ -23,12 +23,14 @@ class CoreFeaturesRemoteDataSourceImpl implements CoreFeaturesRemoteDataSource{
     try {
 
       Response response = await _client.get(
-        AppConsts.url + AppConsts.getAllSellersEndPoint,
+        AppConsts.url + AppConsts.getLocationsEndPoint,
       );
 
       if(response.statusCode! >= 500){
         throw RemoteDataException("The was a server internal error");
       }
+
+      print(response.data);
 
       Map<String,dynamic> responseData = response.data;
 
