@@ -14,12 +14,17 @@ import '../../../seller_variations/views/utils/variations_enum.dart';
 import '../bloc/add_variation/add_variation_cubit.dart';
 import '../components/image_picker_component.dart';
 
-class AddVariationScreen extends StatelessWidget {
+class AddVariationScreen extends StatefulWidget {
   VariationsEnum variationsEnum;
   AddVariationScreen({super.key,required this.variationsEnum});
 
+  @override
+  State<AddVariationScreen> createState() => _AddVariationScreenState();
+}
+
+class _AddVariationScreenState extends State<AddVariationScreen> {
   String getLabel(){
-    switch(variationsEnum){
+    switch(widget.variationsEnum){
       case VariationsEnum.Fabric:
         return "${LocaleKeys.add.tr()} ${LocaleKeys.fabric.tr()}";
 
@@ -41,7 +46,13 @@ class AddVariationScreen extends StatelessWidget {
       case VariationsEnum.Embroidery:
         return "${LocaleKeys.add.tr()} ${LocaleKeys.embroidery.tr()}";
 
-    };
+    }
+  }
+
+  @override
+  void initState() {
+    context.read<AddVariationCubit>().clear();
+    super.initState();
   }
 
   @override
@@ -73,10 +84,10 @@ class AddVariationScreen extends StatelessWidget {
               },
               builder: (context, state) {
                 return ImagePickerComponent(
-                          image: context.read<AddVariationCubit>().selectedImage ,
-                          onTap: ()=> context.read<AddVariationCubit>().onImageSelectionTap(),
-                          onDeleteTap: ()=> context.read<AddVariationCubit>().onImageRemoveTap(),
-                        );
+                  image: context.read<AddVariationCubit>().selectedImage ,
+                  onTap: ()=> context.read<AddVariationCubit>().onImageSelectionTap(),
+                  onDeleteTap: ()=> context.read<AddVariationCubit>().onImageRemoveTap(),
+                );
               },
             ),
 
@@ -108,6 +119,8 @@ class AddVariationScreen extends StatelessWidget {
                   Space(
                     height: 2.h,
                   ),
+
+                  if(widget.variationsEnum == VariationsEnum.Fabric || widget.variationsEnum == VariationsEnum.Embroidery || widget.variationsEnum == VariationsEnum.Button )
                   CustomTextField(
                     controller: context.read<AddVariationCubit>().priceController,
                     validator: (_)=> context.read<AddVariationCubit>().validatePrice(),
@@ -139,7 +152,7 @@ class AddVariationScreen extends StatelessWidget {
                       style: AppTheme.mainTextStyle(
                           color: AppTheme.neutral100, fontSize: 13.sp),
                     ).tr(),
-                    onTap: ()=> context.read<AddVariationCubit>().onAddClick(context,variationsEnum),
+                    onTap: ()=> context.read<AddVariationCubit>().onAddClick(context,widget.variationsEnum),
                   ),
                 );
               },

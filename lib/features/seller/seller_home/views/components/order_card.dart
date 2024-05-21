@@ -8,16 +8,18 @@ import 'package:smart_soft/generated/locale_keys.g.dart';
 import '../../../../../core/config/app_images.dart';
 import '../../../../../core/config/app_theme.dart';
 import '../../../../../core/views/widgets/space.dart';
+import '../../data/entities/get_seller_orders_reponse.dart';
 import '../screens/order_details_screen.dart';
 
 
 class OrderCard extends StatelessWidget {
-  const OrderCard({super.key});
+  SellerOrder sellerOrder;
+  OrderCard({super.key,required this.sellerOrder});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: ()=> Navigator.push(context,MaterialPageRoute(builder: (_)=> OrderDetailsScreen())),
+      onTap: ()=> Navigator.push(context,MaterialPageRoute(builder: (_)=> OrderDetailsScreen(sellerOrder: sellerOrder,))),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 3.w),
         alignment: Alignment.center,
@@ -69,7 +71,7 @@ class OrderCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "رشاد محمد عاطف",
+                          sellerOrder.userName ?? "",
                           style: AppTheme.mainTextStyle(
                               color: AppTheme.neutral900, fontSize: 13.sp),
                         ),

@@ -1,6 +1,6 @@
 class FabricEntity {
   int? id;
-  double? price;
+  num? price;
   String? name;
   String? description;
   String? imgUrl;

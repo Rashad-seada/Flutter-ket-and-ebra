@@ -23,7 +23,8 @@ class RemoveFromCartUseCase {
                     return await repo.removeFromCart(token: userSuccess.token!, cartItemId: cartItemId);
                   }
                   return left(InternalFailure(
-                      "token is equal to null", failureCode: 3));
+                      "token is equal to null", failureCode: 3
+                  ));
                 }
 
             ));

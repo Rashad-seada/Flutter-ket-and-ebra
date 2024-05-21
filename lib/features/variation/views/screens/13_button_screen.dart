@@ -7,6 +7,8 @@ import 'package:smart_soft/features/variation/views/bloc/button/button_cubit.dar
 
 import '../../../../core/config/app_consts.dart';
 import '../../../../core/config/app_images.dart';
+import '../../../../core/config/app_theme.dart';
+import '../../../../core/views/widgets/custom_error_component.dart';
 import '../../../../core/views/widgets/custom_header.dart';
 import '../../../../core/views/widgets/custom_progress_indicator.dart';
 import '../../../../core/views/widgets/space.dart';
@@ -53,16 +55,7 @@ class _ButtonScreenState extends State<ButtonScreen> {
             height: 3.h,
           ),
 
-          SvgPicture.asset(
-            fit: BoxFit.fitWidth,
-            AppImages.cloth,
-            width: 100.w,
-            height: 38.h,
-          ),
 
-          Space(
-            height: 3.h,
-          ),
 
           BlocConsumer<ButtonCubit,ButtonState>(
             listener: (context, state) {},
@@ -72,23 +65,45 @@ class _ButtonScreenState extends State<ButtonScreen> {
               return CustomProgressIndicator();
 
               } else if(state is ButtonError){
-              return Text(ButtonError.error.message);
+                return CustomErrorComponent(
+                  errorMessage: ButtonError.error.message,onTap: (){
+                  context.read<ButtonCubit>().getButton(context);
+                },);
 
               } else if(state is ButtonSuccess){
-              return ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                padding: EdgeInsets.symmetric(horizontal: 7.w),
-                itemCount: ButtonSuccess.buttons.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return ButtonCard(
-                    title: ButtonSuccess.buttons[index].name ?? "Unknown",
-                    imgUrl: AppConsts.imgUrl + ButtonSuccess.buttons[index].imgUrl.toString(),
-                    price: ButtonSuccess.buttons[index].price ?? 0,
-                    onTap: ()=> context.read<ButtonCubit>().onButtonTap(ButtonSuccess.buttons[index].id ?? -1, context),
-                  );
+              return Column(
+                children: [
+                  Space(
+                    height: 3.h,
+                  ),
 
-                },
+                  SvgPicture.asset(
+                    fit: BoxFit.fitHeight,
+                    AppImages.cloth,
+                    width: 100.w,
+                    height: 30.h,
+                    color: AppTheme.neutral400,
+                  ),
+
+                  Space(
+                    height: 5.h,
+                  ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: EdgeInsets.symmetric(horizontal: 7.w),
+                    itemCount: ButtonSuccess.buttons.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ButtonCard(
+                        title: ButtonSuccess.buttons[index].name ?? "Unknown",
+                        imgUrl: AppConsts.imgUrl + ButtonSuccess.buttons[index].imgUrl.toString(),
+                        price: ButtonSuccess.buttons[index].price ?? 0,
+                        onTap: ()=> context.read<ButtonCubit>().onButtonTap(ButtonSuccess.buttons[index].id ?? -1, context),
+                      );
+
+                    },
+                  ),
+                ],
               );
               }
 

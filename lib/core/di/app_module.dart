@@ -6,6 +6,15 @@ import 'package:smart_soft/core/core_feature/domain/usecases/get_all_cities_use_
 import 'package:smart_soft/core/infrastructure/api/api.dart';
 import 'package:smart_soft/core/infrastructure/services/image_picker_service.dart';
 import 'package:smart_soft/core/utils/token_helper.dart';
+import 'package:smart_soft/features/admin/admin_home/data/data_source/remote/admin_remote_data_source.dart';
+import 'package:smart_soft/features/admin/admin_home/data/repo/admin_repo_impl.dart';
+import 'package:smart_soft/features/admin/admin_home/domain/repo/admin_repo.dart';
+import 'package:smart_soft/features/admin/admin_home/domain/usecases/approve_seller_use_case.dart';
+import 'package:smart_soft/features/admin/admin_home/domain/usecases/delete_home_ads_by_admin_use_case.dart';
+import 'package:smart_soft/features/admin/admin_home/domain/usecases/get_admin_home_use_case.dart';
+import 'package:smart_soft/features/admin/admin_home/domain/usecases/get_home_ads_by_admin_use_case.dart';
+import 'package:smart_soft/features/admin/admin_home/domain/usecases/get_rejected_sellers_use_case.dart';
+import 'package:smart_soft/features/admin/admin_home/domain/usecases/set_home_ads_by_admin_use_case.dart';
 import 'package:smart_soft/features/auth/data/data_source/local_data_source/auth_local_data_source.dart';
 import 'package:smart_soft/features/auth/data/data_source/remote_data_source/auth_remote_data_source.dart';
 import 'package:smart_soft/features/auth/data/repo/auth_repo_impl.dart';
@@ -37,6 +46,18 @@ import 'package:smart_soft/features/order/data/repo/order_repo_impl.dart';
 import 'package:smart_soft/features/order/domain/repo/order_repo.dart';
 import 'package:smart_soft/features/order/domain/usecases/create_order_use_case.dart';
 import 'package:smart_soft/features/order/domain/usecases/get_order_use_case.dart';
+import 'package:smart_soft/features/seller/seller_home/data/data_source/remote/seller_orders_remote_data_source.dart';
+import 'package:smart_soft/features/seller/seller_home/data/repo/seller_orders_repo_impl.dart';
+import 'package:smart_soft/features/seller/seller_home/domain/repo/seller_orders_repo.dart';
+import 'package:smart_soft/features/seller/seller_home/domain/usecases/get_seller_by_id_use_case.dart';
+import 'package:smart_soft/features/seller/seller_home/domain/usecases/get_seller_orders_use_case.dart';
+import 'package:smart_soft/features/seller/seller_home/domain/usecases/mark_seller_order_use_case.dart';
+import 'package:smart_soft/features/seller/seller_home/domain/usecases/update_seller_details_use_case.dart';
+import 'package:smart_soft/features/seller/seller_home/domain/usecases/upload_seller_image_use_case.dart';
+import 'package:smart_soft/features/seller/seller_variations/data/data_source/remote/seller_variants_remote_data_source.dart';
+import 'package:smart_soft/features/seller/seller_variations/data/repo/seller_variant_repo_impl.dart';
+import 'package:smart_soft/features/seller/seller_variations/domain/repo/seller_variant_repo.dart';
+import 'package:smart_soft/features/seller/seller_variations/domain/usecase/get_seller_variant_use_case.dart';
 import 'package:smart_soft/features/variation/data/data_source/remote/variation_remote_data_source.dart';
 import 'package:smart_soft/features/variation/data/repo/variation_repo_impl.dart';
 import 'package:smart_soft/features/variation/domain/repo/variation_repo.dart';
@@ -59,6 +80,7 @@ import '../../features/seller/add_variation/domain/usecase/create_embroidery_use
 import '../../features/seller/add_variation/domain/usecase/create_fabric_use_case.dart';
 import '../../features/seller/add_variation/domain/usecase/create_front_pocket_use_case.dart';
 import '../../features/seller/add_variation/domain/usecase/create_sleeve_use_case.dart';
+import '../../features/seller/seller_variations/domain/usecase/delete_seller_variant_use_case.dart';
 import '../core_feature/domain/usecases/validate_password_use_case.dart';
 import '../core_feature/domain/usecases/validate_phone_use_case.dart';
 import '../core_feature/domain/usecases/validate_sizes_use_case.dart';
@@ -94,7 +116,11 @@ abstract class AppModule {
     getIt.registerSingleton<HomeRemoteDataSource>(HomeRemoteDataSourceImpl());
     // ------ Order ------
     getIt.registerSingleton<OrderRemoteDataSource>(OrderRemoteDataSourceImpl());
-
+    // ------ Seller order ------
+    getIt.registerSingleton<SellerOrdersRemoteDataSource>(SellerOrdersRemoteDataSourceImpl());
+    getIt.registerSingleton<SellerVariantsRemoteDataSource>(SellerVariantsRemoteDataSourceImpl());
+    // ------ Admin ------
+    getIt.registerSingleton<AdminRemoteDataSource>(AdminRemoteDataSourceImpl());
 
     //repos
     // ------ Auth ------
@@ -111,7 +137,11 @@ abstract class AppModule {
     getIt.registerSingleton<HomeRepo>(HomeRepoImpl());
     // ------ Order ------
     getIt.registerSingleton<OrderRepo>(OrderRepoImpl());
-
+    // ------ Seller order ------
+    getIt.registerSingleton<SellerOrdersRepo>(SellerOrdersRepoImpl());
+    getIt.registerSingleton<SellerVariantRepo>(SellerVariantRepoImpl());
+    // ------ Admin ------
+    getIt.registerSingleton<AdminRepo>(AdminRepoImpl());
 
     //use case
     // ------ Auth ------
@@ -122,15 +152,18 @@ abstract class AppModule {
     getIt.registerSingleton<SendOtpUseCase>(SendOtpUseCase());
     getIt.registerSingleton<ConfirmOtpUseCase>(ConfirmOtpUseCase());
 
+
     // ----- User -----
     getIt.registerSingleton<GetUserUseCase>(GetUserUseCase());
     getIt.registerSingleton<SetUserUseCase>(SetUserUseCase());
     getIt.registerSingleton<DeleteUserUseCase>(DeleteUserUseCase());
     getIt.registerSingleton<UpdateUserUseCase>(UpdateUserUseCase());
 
+
     // ----- Get Seller -----
     getIt.registerSingleton<GetAllSellersUseCase>(GetAllSellersUseCase());
     getIt.registerSingleton<GetSellersByLocationIdUseCase>(GetSellersByLocationIdUseCase());
+
 
     // ----- Variation -----
     getIt.registerSingleton<GetFabricBySellerIdUseCase>(GetFabricBySellerIdUseCase());
@@ -141,6 +174,7 @@ abstract class AppModule {
     getIt.registerSingleton<GetButtonBySellerIdUseCase>(GetButtonBySellerIdUseCase());
     getIt.registerSingleton<GetEmbroideryBySellerIdUseCase>(GetEmbroideryBySellerIdUseCase());
 
+
     // ----- Create Variation -----
     getIt.registerSingleton<CreateButtonUseCase>(CreateButtonUseCase());
     getIt.registerSingleton<CreateChestUseCase>(CreateChestUseCase());
@@ -150,23 +184,46 @@ abstract class AppModule {
     getIt.registerSingleton<CreateFrontPocketUseCase>(CreateFrontPocketUseCase());
     getIt.registerSingleton<CreateSleeveUseCase>(CreateSleeveUseCase());
 
+
     // ------ Cart ------
     getIt.registerSingleton<GetCartUseCase>(GetCartUseCase());
     getIt.registerSingleton<RemoveFromCartUseCase>(RemoveFromCartUseCase());
     getIt.registerSingleton<UpdateCartItemUseCase>(UpdateCartItemUseCase());
     getIt.registerSingleton<AddToCartUseCase>(AddToCartUseCase());
 
+
     // ------ Home ------
     getIt.registerSingleton<GetHomeAdsUseCase>(GetHomeAdsUseCase());
     getIt.registerSingleton<SetHomeAdsUseCase>(SetHomeAdsUseCase());
+
 
     // ------ Order ------
     getIt.registerSingleton<CreateOrderUseCase>(CreateOrderUseCase());
     getIt.registerSingleton<GetOrderUseCase>(GetOrderUseCase());
 
 
+    // ------ Seller Orders ------
+    getIt.registerSingleton<GetSellerOrdersUseCase>(GetSellerOrdersUseCase());
+    getIt.registerSingleton<MarkSellerOrderUseCase>(MarkSellerOrderUseCase());
+    getIt.registerSingleton<GetSellerVariantUseCase>(GetSellerVariantUseCase());
+    getIt.registerSingleton<DeleteSellerVariantUseCase>(DeleteSellerVariantUseCase());
+    getIt.registerSingleton<GetSellerByIdUseCase>(GetSellerByIdUseCase());
+    getIt.registerSingleton<UpdateSellerDetailsUseCase>(UpdateSellerDetailsUseCase());
+    getIt.registerSingleton<UploadSellerImageUseCase>(UploadSellerImageUseCase());
+
+
+    // ------ Admin ------
+    getIt.registerSingleton<ApproveSellerUseCase>(ApproveSellerUseCase());
+    getIt.registerSingleton<DeleteHomeAdsByAdminUseCase>(DeleteHomeAdsByAdminUseCase());
+    getIt.registerSingleton<GetAdminHomeUseCase>(GetAdminHomeUseCase());
+    getIt.registerSingleton<GetHomeAdsByAdminUseCase>(GetHomeAdsByAdminUseCase());
+    getIt.registerSingleton<GetRejectedSellersUseCase>(GetRejectedSellersUseCase());
+    getIt.registerSingleton<SetHomeAdsByAdminUseCase>(SetHomeAdsByAdminUseCase());
+
+
     // ------ Core Features ------
     getIt.registerSingleton<GetAllCitiesUseCase>(GetAllCitiesUseCase());
+
 
     // ----- Validation -----
     getIt.registerSingleton<ValidatePhoneUseCase>(ValidatePhoneUseCase());
@@ -174,6 +231,7 @@ abstract class AppModule {
     getIt.registerSingleton<ValidateUsernameUseCase>(ValidateUsernameUseCase());
     getIt.registerSingleton<ValidateTextUseCase>(ValidateTextUseCase());
     getIt.registerSingleton<ValidateSizesUseCase>(ValidateSizesUseCase());
+
 
   }
 

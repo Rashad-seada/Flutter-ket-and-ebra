@@ -30,15 +30,19 @@ class LoginCubit extends Cubit<LoginState> {
 
 
   String? validatePhone(){
-    return getIt<ValidatePhoneUseCase>().call(phoneNumberController.text);
+    if(phoneNumberController.text.isEmpty){
+      return "يجب عليك ادخال الرقم الخاص بك";
+    } else if(int.tryParse(phoneNumberController.text) == null){
+      return "يجب ادخال ارقام فقط";
+    }
   }
 
   String? validatePassword(){
     return getIt<ValidatePasswordUseCase>().call(passwordController.text);
   }
 
-  onForgotPasswordClick(BuildContext context){
-    _navigateToResetPasswordScreen(context);
+  onForgotPasswordClick(BuildContext context,RegisterType registerType){
+    _navigateToResetPasswordScreen(context,registerType);
   }
 
   onLoginClick(BuildContext context){
@@ -132,23 +136,23 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   _navigateToRegisterScreen(BuildContext context){
-    Navigator.push(context,MaterialPageRoute(builder: (_)=> RegisterScreen(registerType:  RegisterType.RegisterSeller,)));
+    Navigator.push(context,MaterialPageRoute(builder: (_)=> RegisterScreen(registerType:  RegisterType.RegisterCustomer,)));
   }
 
-  _navigateToResetPasswordScreen(BuildContext context){
-    Navigator.push(context,MaterialPageRoute(builder: (_)=> const ResetPasswordScreen()));
+  _navigateToResetPasswordScreen(BuildContext context,RegisterType registerType){
+    Navigator.push(context,MaterialPageRoute(builder: (_)=> ResetPasswordScreen(registerType: registerType,)));
   }
 
   _navigateToHomeScreen(BuildContext context){
-    Navigator.push(context,MaterialPageRoute(builder: (_)=> const HomeScreen()));
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=> const HomeScreen()), (route) => false);
   }
 
   _navigateToSellerHomeScreen(BuildContext context){
-    Navigator.push(context,MaterialPageRoute(builder: (_)=> const SellerHomeScreen()));
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=> const SellerHomeScreen()), (route) => false);
   }
 
   _navigateToAdminHomeScreen(BuildContext context){
-    Navigator.push(context,MaterialPageRoute(builder: (_)=> const AdminHomeScreen()));
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=> const AdminHomeScreen()), (route) => false);
   }
 
 }

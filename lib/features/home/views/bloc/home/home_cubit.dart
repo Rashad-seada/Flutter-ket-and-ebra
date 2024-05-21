@@ -21,6 +21,14 @@ class HomeCubit extends Cubit<HomeState> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
 
+  int selectedIndex = 0;
+
+  onPageChange(int index){
+    emit(HomePageChanged());
+    selectedIndex = index;
+    emit(HomeInitial());
+  }
+
   closeDrawer(BuildContext context){
     scaffoldKey.currentState?.closeDrawer();
   }

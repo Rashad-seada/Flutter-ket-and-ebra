@@ -34,7 +34,7 @@ class OtpCubit extends Cubit<OtpState> {
     pinCode = pin;
   }
 
-  onConfirmClick(BuildContext context) {
+  onConfirmClick(BuildContext context, registerType) {
     if(formKey.currentState!.validate()){
       confirmOtp(context, pinCode);
     }

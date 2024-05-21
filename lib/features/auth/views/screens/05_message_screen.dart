@@ -32,10 +32,10 @@ class MessageScreen extends StatelessWidget {
               ),
 
               Center(
-                child: SvgPicture.asset(
-                  AppImages.done,
-                  width: 86.w,
-                  height: 20.h,
+                child: Icon(
+                  Icons.check_circle,
+                  color: AppTheme.success,
+                  size: 35.w,
                 ),
               ),
 
@@ -44,7 +44,7 @@ class MessageScreen extends StatelessWidget {
               ),
 
               Text(
-                LocaleKeys.all_done,
+                  title,
                 style: AppTheme.mainTextStyle(
                   color: AppTheme.neutral900,
                   fontSize: 25.sp,
@@ -58,7 +58,7 @@ class MessageScreen extends StatelessWidget {
               ),
 
               Text(
-                LocaleKeys.all_done_description,
+                  description,
                 style: AppTheme.mainTextStyle(
                     color: AppTheme.neutral700,
                     fontSize: 12.sp
@@ -71,6 +71,7 @@ class MessageScreen extends StatelessWidget {
               ),
 
               MainButton(
+                color: AppTheme.primary900,
                 width: 86.w,
                 height: 7.h,
                 label: Text(
@@ -81,7 +82,7 @@ class MessageScreen extends StatelessWidget {
                   ),
                 ).tr(),
                 onTap: () => context.read<RegisterCubit>().onDoneClick(context),
-              )
+              ),
 
             ],
           ),

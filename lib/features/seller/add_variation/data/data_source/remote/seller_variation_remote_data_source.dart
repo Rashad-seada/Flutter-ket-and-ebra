@@ -190,12 +190,12 @@ class SellerVariationRemoteDataSourceImpl implements SellerVariationRemoteDataSo
           data: requestData
       );
 
+
       if(response.statusCode! >= 500){
         throw RemoteDataException("The was a server internal error");
       }
 
       Map<String,dynamic> responseData = response.data;
-      print(responseData);
 
       return CreateVariationResponse.fromJson(responseData);
 

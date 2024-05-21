@@ -19,15 +19,21 @@ class CustomNetworkImage extends StatelessWidget {
       height: height,
       fit: fit,
       imageUrl: url,
-      placeholder: (context, url) => SvgPicture.asset(
-        AppImages.image,
-        width: 9.w,
-        height: 9.w,
+      placeholder: (context, url) => Padding(
+        padding: EdgeInsets.all(8.w),
+        child: SvgPicture.asset(
+          AppImages.image,
+          width: 9.w,
+          height: 9.w,
+        ),
       ),
-      errorWidget: (context, url, error) => SvgPicture.asset(
-        AppImages.errorImage,
-        width: 9.w,
-        height: 9.w,
+      errorWidget: (context, url, error) => Padding(
+        padding: EdgeInsets.all(8.w),
+        child: SvgPicture.asset(
+          AppImages.errorImage,
+          width: 9.w,
+          height: 9.w,
+        ),
       ),
     );
   }

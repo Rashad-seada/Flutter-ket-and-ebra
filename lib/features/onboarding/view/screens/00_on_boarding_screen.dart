@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
+import 'package:smart_soft/core/bloc/core_cubit.dart';
 import 'package:smart_soft/features/onboarding/view/bloc/on_boarding_cubit.dart';
 import 'package:smart_soft/generated/locale_keys.g.dart';
 import '../../../../core/config/app_images.dart';
@@ -10,8 +11,20 @@ import '../../../../core/views/widgets/custom_page_indicator.dart';
 import '../../../../core/views/widgets/main_button.dart';
 import '../pages/on_boarding_page.dart';
 
-class OnBoardingScreen extends StatelessWidget {
+class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({Key? key}) : super(key: key);
+
+  @override
+  State<OnBoardingScreen> createState() => _OnBoardingScreenState();
+}
+
+class _OnBoardingScreenState extends State<OnBoardingScreen> {
+
+  @override
+  void initState() {
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +79,7 @@ class OnBoardingScreen extends StatelessWidget {
             Positioned(
               bottom: 14.h,
               child: BlocConsumer<OnBoardingCubit, OnBoardingState>(
-                listener: (context, state) {
-                  // TODO: implement listener
-                },
+                listener: (context, state) {},
                 builder: (context, state) {
                   return MainButton(
                     color: AppTheme.primary900,

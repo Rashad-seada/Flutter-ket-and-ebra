@@ -1,8 +1,13 @@
+
+
+
+import '../../../seller/seller_home/data/entities/get_seller_orders_reponse.dart';
+
 class CartResponse {
   bool? isSuccssed;
   String? message;
   Obj? obj;
-  Null? errors;
+  dynamic? errors;
 
   CartResponse({this.isSuccssed, this.message, this.obj, this.errors});
 
@@ -52,21 +57,21 @@ class Obj {
 }
 
 class Details {
-  num? id;
-  num? height;
-  num? shoulder;
-  num? armLenght;
-  num? chestWide;
-  num? neck;
-  num? handSize;
-  num? kbkLength;
-  num? textureId;
-  num? yakaId;
-  num? chestId;
-  num? frontPocketId;
+  int? id;
+  int? height;
+  int? shoulder;
+  int? armLenght;
+  int? chestWide;
+  int? neck;
+  int? handSize;
+  int? kbkLength;
+  int? textureId;
+  int? yakaId;
+  int? chestId;
+  int? frontPocketId;
   String? textureName;
   String? textureImg;
-  num? texturePrice;
+  int? texturePrice;
   String? yakaName;
   String? yakaUrl;
   String? chestName;
@@ -77,15 +82,15 @@ class Details {
   String? handUrl;
   String? buttonsName;
   String? buttonsUrl;
-  num? buttonsPrice;
+  int? buttonsPrice;
   String? embroideryName;
   String? embroideryUrl;
-  num? embroideryPrice;
-  num? handId;
-  num? buttonsId;
-  num? embroideryId;
-  num? itemCartId;
-  num? sellerrId;
+  int? embroideryPrice;
+  int? handId;
+  int? buttonsId;
+  int? embroideryId;
+  int? itemCartId;
+  int? sellerrId;
 
   Details(
       {this.id,
@@ -198,4 +203,34 @@ class Details {
     data['sellerrId'] = this.sellerrId;
     return data;
   }
+
+  SellerOrder toSellerOrder() {
+    return SellerOrder(
+      height: this.height,
+      shoulder: this.shoulder,
+      armLenght: this.armLenght,
+      chestWide: this.chestWide,
+      neck: this.neck,
+      handSize: this.handSize,
+      kbkLength: this.kbkLength,
+      textureName: this.textureName,
+      textureImg: this.textureImg,
+      texturePrice: this.texturePrice,
+      yakaName: this.yakaName,
+      yakaUrl: this.yakaUrl,
+      chestName: this.chestName,
+      chestUrl: this.chestUrl,
+      frontPocketName: this.frontPocketName,
+      frontPocketUrl: this.frontPocketUrl,
+      handName: this.handName,
+      handUrl: this.handUrl,
+      buttonsName: this.buttonsName,
+      buttonsUrl: this.buttonsUrl,
+      buttonsPrice: this.buttonsPrice,
+      embroideryName: this.embroideryName,
+      embroideryUrl: this.embroideryUrl,
+      embroideryPrice: this.embroideryPrice,
+    );
+  }
+
 }

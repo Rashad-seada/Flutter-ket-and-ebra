@@ -113,7 +113,17 @@ class CodegenLoader extends AssetLoader{
   "empty_cart_item": "ليس لديك أي عناصر في العربة، حاول إضافة عنصر واحد على الأقل وسيظهر في هذه الصفحة",
   "image_pick": "الرجاء النقر هنا لاختيار صورة",
   "name": "اسم الاختيار",
-  "description": "وصف حول الاختيار"
+  "description": "وصف حول الاختيار",
+  "tailor_details": "تفاصيل الخياط",
+  "accept": "قبول",
+  "reject": "رفض",
+  "pending_seller_request_sub_text": "هذا هو عدد البائعين الذين طلبوا الانضمام إلى التطبيق",
+  "new_user_sub_text": "هذا هو عدد المستخدمين الذين انضموا إلى التطبيق",
+  "monthly_income_sub_text": "هذا هو الدخل الشهري من خلال التطبيق",
+  "new_seller_sub_text": "هذا هو عدد البائعين الجدد الذين انضموا إلى التطبيق",
+  "home_ads": "إعلانات الصفحة الرئيسية",
+  "home_ads_sub_text": "يمكنك ضبط إعلانات الصفحة الرئيسية من هنا",
+  "register_seller_message": "تمت مراجعة تفاصيلك من قبل المسؤول، ستتمكن من تسجيل الدخول بمجرد الموافقة عليها"
 };
 static const Map<String,dynamic> en = {
   "on_boarding_title_1": "Digital Catalog",
@@ -214,7 +224,17 @@ static const Map<String,dynamic> en = {
   "empty_cart_item": "You have no items in the cart, try adding at least one item and it will appear in this page",
   "image_pick": "Please tap here to pick up an image",
   "name": "Name of the variant",
-  "description": "Description about the variant"
+  "description": "Description about the variant",
+  "tailor_details": "Tailor details",
+  "accept": "Accept",
+  "reject": "Reject",
+  "pending_seller_request_sub_text": "this is the number of sellers that applied to join the app",
+  "new_user_sub_text": "this is the number of users that joined the app",
+  "monthly_income_sub_text": "this is the monthly income throw the app",
+  "new_seller_sub_text": "this is the number of new sellers that joined the app",
+  "home_ads": "Home ads",
+  "home_ads_sub_text": "you can set home ads from here",
+  "register_seller_message": "Your details is being review by the admin, you will be able to login once you been approved"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

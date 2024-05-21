@@ -14,11 +14,26 @@ import '../../../../core/views/widgets/custom_text_field.dart';
 import '../../../../core/views/widgets/main_button.dart';
 import '../../../../core/views/widgets/space.dart';
 import '../../../../generated/locale_keys.g.dart';
+import '../../../order/views/blocs/orders/order_cubit.dart';
+import '../../../order/views/components/location_drop_down.dart';
 import '../../utils/register_type.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   RegisterType registerType;
   RegisterScreen({Key? key,required this.registerType}) : super(key: key);
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+
+
+  @override
+  void initState() {
+    context.read<RegisterCubit>().getAllCities();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,225 +53,271 @@ class RegisterScreen extends StatelessWidget {
             Space(
               height: 4.h,
             ),
+            
+            
+            BlocBuilder<RegisterCubit, RegisterState>(
+              builder: (context, state) {
 
-            Text(
-              LocaleKeys.register,
-              style: AppTheme.mainTextStyle(
-                color: AppTheme.neutral900,
-                fontSize: 25.sp,
-              ),
-            ).tr(),
+                if(state is RegisterGettingCities){
+                  return CustomProgressIndicator();
+                } else {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        LocaleKeys.register,
+                        style: AppTheme.mainTextStyle(
+                          color: AppTheme.neutral900,
+                          fontSize: 25.sp,
+                        ),
+                      ).tr(),
 
 
-            Space(
-              height: 2.h,
-            ),
+                      Space(
+                        height: 2.h,
+                      ),
 
-            Form(
-              key: context.read<RegisterCubit>().formKey,
-              child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  LocaleKeys.username,
-                  style: AppTheme.mainTextStyle(
-                      color: AppTheme.neutral400, fontSize: 12.sp),
-                ).tr(),
-                Space(
-                  height: 0.5.h,
-                ),
-                CustomTextField(
-                  controller: context.read<RegisterCubit>().usernameController,
-                  validator: (_)=> context.read<RegisterCubit>().validateUsername(),
-                  prefixIcon: Padding(
-                    padding: EdgeInsets.all(3.w),
-                    child: SvgPicture.asset(
-                      AppImages.profile,
-                      width: 3.w,
-                      height: 3.h,
-                    ),
+                      Form(
+                          key: context.read<RegisterCubit>().formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                LocaleKeys.username,
+                                style: AppTheme.mainTextStyle(
+                                    color: AppTheme.neutral400, fontSize: 12.sp),
+                              ).tr(),
+                              Space(
+                                height: 0.5.h,
+                              ),
+                              CustomTextField(
+                                controller: context.read<RegisterCubit>().usernameController,
+                                validator: (_)=> context.read<RegisterCubit>().validateUsername(),
+                                prefixIcon: Padding(
+                                  padding: EdgeInsets.all(3.w),
+                                  child: SvgPicture.asset(
+                                    AppImages.profile,
+                                    width: 3.w,
+                                    height: 3.h,
+                                  ),
 
-                  ),
-                  hint: LocaleKeys.username_hint.tr(),
-                ),
-                Space(
-                  height: 1.h,
-                ),
+                                ),
+                                hint: LocaleKeys.username_hint.tr(),
+                              ),
+                              Space(
+                                height: 1.h,
+                              ),
 
-                Text(
-                  LocaleKeys.phone_number,
-                  style: AppTheme.mainTextStyle(
-                      color: AppTheme.neutral400, fontSize: 12.sp),
-                ).tr(),
-                Space(
-                  height: 0.5.h,
-                ),
-                CustomTextField(
-                  controller: context.read<RegisterCubit>().phoneNumberController,
-                  validator: (_)=> context.read<RegisterCubit>().validatePhone(),
-                  prefixIcon: Padding(
-                    padding: EdgeInsets.all(3.w),
-                    child: SvgPicture.asset(
-                      AppImages.phone,
-                      width: 3.w,
-                      height: 3.h,
-                    ),
+                              Text(
+                                LocaleKeys.phone_number,
+                                style: AppTheme.mainTextStyle(
+                                    color: AppTheme.neutral400, fontSize: 12.sp),
+                              ).tr(),
+                              Space(
+                                height: 0.5.h,
+                              ),
+                              CustomTextField(
+                                controller: context.read<RegisterCubit>().phoneNumberController,
+                                validator: (_)=> context.read<RegisterCubit>().validatePhone(),
+                                prefixIcon: Padding(
+                                  padding: EdgeInsets.all(3.w),
+                                  child: SvgPicture.asset(
+                                    AppImages.phone,
+                                    width: 3.w,
+                                    height: 3.h,
+                                  ),
 
-                  ),
-                  hint: LocaleKeys.phone_number_hint.tr(),
-                ),
-                Space(
-                  height: 1.h,
-                ),
+                                ),
+                                hint: LocaleKeys.phone_number_hint.tr(),
+                              ),
+                              Space(
+                                height: 1.h,
+                              ),
 
-                if(registerType == RegisterType.RegisterSeller)
-                  Text(
-                  LocaleKeys.trade_register,
-                  style: AppTheme.mainTextStyle(
-                      color: AppTheme.neutral400, fontSize: 12.sp),
-                ).tr(),
-                if(registerType == RegisterType.RegisterSeller)
-                  Space(
-                  height: 0.5.h,
-                ),
-                if(registerType == RegisterType.RegisterSeller)
-                  CustomTextField(
-                  controller: context.read<RegisterCubit>().tradeRegisterController,
-                  validator: (_)=> context.read<RegisterCubit>().validateTradeRegister(),
-                  prefixIcon: Padding(
-                    padding: EdgeInsets.all(3.w),
-                    child: SvgPicture.asset(
-                      AppImages.tradeRegister,
-                      width: 3.w,
-                      height: 3.h,
-                    ),
+                              if(widget.registerType == RegisterType.RegisterSeller)
+                                Text(
+                                  LocaleKeys.trade_register,
+                                  style: AppTheme.mainTextStyle(
+                                      color: AppTheme.neutral400, fontSize: 12.sp),
+                                ).tr(),
+                              if(widget.registerType == RegisterType.RegisterSeller)
+                                Space(
+                                  height: 0.5.h,
+                                ),
+                              if(widget.registerType == RegisterType.RegisterSeller)
+                                CustomTextField(
+                                  controller: context.read<RegisterCubit>().tradeRegisterController,
+                                  validator: (_)=> context.read<RegisterCubit>().validateTradeRegister(),
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.all(3.w),
+                                    child: SvgPicture.asset(
+                                      AppImages.tradeRegister,
+                                      width: 3.w,
+                                      height: 3.h,
+                                    ),
 
-                  ),
-                  hint: LocaleKeys.trade_register_hint.tr(),
-                ),
-                if(registerType == RegisterType.RegisterSeller)
-                  Space(
-                  height: 1.h,
-                ),
+                                  ),
+                                  keyboardType: TextInputType.number,
 
-                if(registerType == RegisterType.RegisterSeller)
-                  Text(
-                  LocaleKeys.tax_id_number,
-                  style: AppTheme.mainTextStyle(
-                      color: AppTheme.neutral400, fontSize: 12.sp),
-                ).tr(),
-                if(registerType == RegisterType.RegisterSeller)
-                  Space(
-                  height: 0.5.h,
-                ),
-                if(registerType == RegisterType.RegisterSeller)
-                  CustomTextField(
-                  controller: context.read<RegisterCubit>().taxIdController,
-                  validator: (_)=> context.read<RegisterCubit>().validateTaxId(),
-                  prefixIcon: Padding(
-                    padding: EdgeInsets.all(3.w),
-                    child: SvgPicture.asset(
-                      AppImages.taxId,
-                      width: 3.w,
-                      height: 3.h,
-                    ),
+                                  hint: LocaleKeys.trade_register_hint.tr(),
+                                ),
+                              if(widget.registerType == RegisterType.RegisterSeller)
+                                Space(
+                                  height: 1.h,
+                                ),
 
-                  ),
-                  hint: LocaleKeys.tax_id_number_hint.tr(),
-                ),
-                if(registerType == RegisterType.RegisterSeller)
-                  Space(
-                  height: 1.h,
-                ),
+                              if(widget.registerType == RegisterType.RegisterSeller)
+                                Text(
+                                  LocaleKeys.tax_id_number,
+                                  style: AppTheme.mainTextStyle(
+                                      color: AppTheme.neutral400, fontSize: 12.sp),
+                                ).tr(),
+                              if(widget.registerType == RegisterType.RegisterSeller)
+                                Space(
+                                  height: 0.5.h,
+                                ),
+                              if(widget.registerType == RegisterType.RegisterSeller)
+                                CustomTextField(
+                                  controller: context.read<RegisterCubit>().taxIdController,
+                                  validator: (_)=> context.read<RegisterCubit>().validateTaxId(),
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.all(3.w),
+                                    child: SvgPicture.asset(
+                                      AppImages.taxId,
+                                      width: 3.w,
+                                      height: 3.h,
+                                    ),
 
-                if(registerType == RegisterType.RegisterSeller)
-                  Text(
-                  LocaleKeys.registration_certificate,
-                  style: AppTheme.mainTextStyle(
-                      color: AppTheme.neutral400, fontSize: 12.sp),
-                ).tr(),
-                if(registerType == RegisterType.RegisterSeller)
-                  Space(
-                  height: 0.5.h,
-                ),
-                if(registerType == RegisterType.RegisterSeller)
-                  BlocConsumer<RegisterCubit, RegisterState>(
-                    listener: (context, state) {},
-                    builder: (context, state) {
-                      return CertificateUpload(
-                          file: context.read<RegisterCubit>().file,
-                          onTap: () => context.read<RegisterCubit>().onUploadClick(),
-                          width: double.infinity,
-                          height: 6.h,
-                      );
-                    },
-                ),
-                if(registerType == RegisterType.RegisterSeller)
-                  Space(
-                  height: 1.h,
-                ),
+                                  ),
+                                  keyboardType: TextInputType.number,
 
-                Text(
-                  LocaleKeys.password,
-                  style: AppTheme.mainTextStyle(
-                      color: AppTheme.neutral400, fontSize: 12.sp),
-                ).tr(),
-                Space(
-                  height: 0.5.h,
-                ),
-                CustomTextField(
-                  controller: context.read<RegisterCubit>().passwordController,
-                  validator: (_)=> context.read<RegisterCubit>().validatePassword(),
-                  prefixIcon: Padding(
-                    padding: EdgeInsets.all(3.w),
-                    child: SvgPicture.asset(
-                      AppImages.password,
-                      width: 3.w,
-                      height: 3.h,
-                    ),
-                  ),
-                  hint: LocaleKeys.password_hint.tr(),
-                  isSecure: true,
-                ),
-              ],
-            )),
+                                  hint: LocaleKeys.tax_id_number_hint.tr(),
+                                ),
+                              if(widget.registerType == RegisterType.RegisterSeller)
+                                Space(
+                                  height: 1.h,
+                                ),
 
-            Space(
-              height: (registerType == RegisterType.RegisterSeller)? 3.h : 7.h,
-            ),
+                              if(widget.registerType == RegisterType.RegisterSeller)
+                                Text(
+                                  LocaleKeys.registration_certificate,
+                                  style: AppTheme.mainTextStyle(
+                                      color: AppTheme.neutral400, fontSize: 12.sp),
+                                ).tr(),
+                              if(widget.registerType == RegisterType.RegisterSeller)
+                                Space(
+                                  height: 0.5.h,
+                                ),
+                              if(widget.registerType == RegisterType.RegisterSeller)
+                                BlocConsumer<RegisterCubit, RegisterState>(
+                                  listener: (context, state) {},
+                                  builder: (context, state) {
+                                    return CertificateUpload(
+                                      file: context.read<RegisterCubit>().file,
+                                      onTap: () => context.read<RegisterCubit>().onUploadClick(),
+                                      width: double.infinity,
+                                      height: 6.h,
+                                    );
+                                  },
+                                ),
+                              if(widget.registerType == RegisterType.RegisterSeller)
+                                Space(
+                                  height: 1.h,
+                                ),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
+                              if(widget.registerType == RegisterType.RegisterSeller)
+                                Text(
+                                  LocaleKeys.location,
+                                  style: AppTheme.mainTextStyle(
+                                      color: AppTheme.neutral400, fontSize: 12.sp),
+                                ).tr(),
+                              if(widget.registerType == RegisterType.RegisterSeller)
+                                Space(
+                                  height: 0.5.h,
+                                ),
+                              if(widget.registerType == RegisterType.RegisterSeller)
+                                BlocConsumer<RegisterCubit,RegisterState>(
+                                  listener: (context, state) {},
+                                  builder: (context, state) {
 
-                Text(
-                  LocaleKeys.already_have_account.tr(),
-                  style: AppTheme.mainTextStyle(
-                      color: AppTheme.neutral400, fontSize: 12.sp),
-                ).tr(),
-                Space(
-                  width: 2.w,
-                ),
-                InkWell(
-                  onTap: ()=> context.read<RegisterCubit>().onLoginClick(context),
-                  child: Text(
-                    LocaleKeys.login.tr(),
-                    style: AppTheme.mainTextStyle(
-                        color: AppTheme.primary900, fontSize: 12.sp),
-                  ).tr(),
-                ),
-              ],
-            ),
+                                    return LocationDropDown(
+                                      width: 86.w,
+                                      height: 6.h,
+                                      cities: context.read<RegisterCubit>().allCities,
+                                      onChanged: (city){
+                                        context.read<RegisterCubit>().selectedCity = city;
+                                        setState(() {});
+                                      },
+                                      selectedCity: context.read<RegisterCubit>().selectedCity!,
+                                    );
+                                  },
+                                ),
+                              if(widget.registerType == RegisterType.RegisterSeller)
+                                Space(
+                                  height: 1.h,
+                                ),
 
-            Space(
-              height: 2.h,
-            ),
+                              Text(
+                                LocaleKeys.password,
+                                style: AppTheme.mainTextStyle(
+                                    color: AppTheme.neutral400, fontSize: 12.sp),
+                              ).tr(),
+                              Space(
+                                height: 0.5.h,
+                              ),
+                              CustomTextField(
+                                controller: context.read<RegisterCubit>().passwordController,
+                                validator: (_)=> context.read<RegisterCubit>().validatePassword(),
+                                prefixIcon: Padding(
+                                  padding: EdgeInsets.all(3.w),
+                                  child: SvgPicture.asset(
+                                    AppImages.password,
+                                    width: 3.w,
+                                    height: 3.h,
+                                  ),
+                                ),
+                                hint: LocaleKeys.password_hint.tr(),
+                                isSecure: true,
+                              ),
+                            ],
+                          )),
 
-            BlocConsumer<RegisterCubit,RegisterState>(
-                listener: (context, state) {},
-                builder: (context, state) {
-                  return MainButton(
+                      Space(
+                        height: (widget.registerType == RegisterType.RegisterSeller)? 3.h : 7.h,
+                      ),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+
+                          Text(
+                            LocaleKeys.already_have_account.tr(),
+                            style: AppTheme.mainTextStyle(
+                                color: AppTheme.neutral400, fontSize: 12.sp),
+                          ).tr(),
+                          Space(
+                            width: 2.w,
+                          ),
+                          InkWell(
+                            onTap: ()=> context.read<RegisterCubit>().onLoginClick(context),
+                            child: Text(
+                              LocaleKeys.login.tr(),
+                              style: AppTheme.mainTextStyle(
+                                  color: AppTheme.primary900, fontSize: 12.sp),
+                            ).tr(),
+                          ),
+                        ],
+                      ),
+
+                      Space(
+                        height: 2.h,
+                      ),
+
+                      BlocConsumer<RegisterCubit,RegisterState>(
+                        listener: (context, state) {},
+                        builder: (context, state) {
+                          return MainButton(
                             width: 86.w,
                             height: 6.5.h,
                             color: AppTheme.primary900,
@@ -267,15 +328,23 @@ class RegisterScreen extends StatelessWidget {
                               style: AppTheme.mainTextStyle(
                                   color: AppTheme.neutral100, fontSize: 14.sp),
                             ).tr(),
-                            onTap: ()=> context.read<RegisterCubit>().onRegisterClick(context,registerType),
+                            onTap: ()=> context.read<RegisterCubit>().onRegisterClick(context,widget.registerType),
                           );
-                },
-              ),
+                        },
+                      ),
 
-            Space(
-              height: 2.h,
+                      Space(
+                        height: 5.h,
+                      ),
+
+                    ],
+                  );
+                }
+
+              },
             ),
 
+            
           ],
         ),
       ),

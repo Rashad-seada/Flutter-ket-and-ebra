@@ -60,7 +60,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       return LoginResponse.fromJson(responseData,);
 
     } catch (e) {
-      throw RemoteDataException(e.toString());
+      throw RemoteDataException("حدث خطا غير متوقع. يرجى اعاده المحاوله");
     }
 
   }
@@ -87,7 +87,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       return RegisterCustomerResponse.fromJson(response.data);
 
     } catch (e) {
-      throw RemoteDataException(e.toString());
+      throw RemoteDataException("حدث خطا غير متوقع. يرجى اعاده المحاوله");
     }
   }
 
@@ -117,7 +117,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       return RegisterSellerResponse.fromJson(responseData,);
 
     } catch (e) {
-      throw RemoteDataException(e.toString());
+      throw RemoteDataException("حدث خطا غير متوقع. يرجى اعاده المحاوله");
     }
 
   }
@@ -141,7 +141,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       return ResetPasswordResponse.fromJson(responseData);
 
     } catch (e) {
-      throw RemoteDataException(e.toString());
+      throw RemoteDataException("حدث خطا غير متوقع. يرجى اعاده المحاوله");
     }
   }
 
@@ -164,7 +164,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         },
       );
     } catch (e) {
-      throw RemoteDataException(e.toString());
+      throw RemoteDataException("حدث خطا غير متوقع. يرجى اعاده المحاوله");
     }
   }
 
@@ -182,7 +182,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       }
 
     } catch (e) {
-      throw RemoteDataException(e.toString());
+      throw RemoteDataException("حدث خطا غير متوقع. يرجى اعاده المحاوله");
     }
 
   }

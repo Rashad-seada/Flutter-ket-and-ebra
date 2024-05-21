@@ -23,3 +23,5 @@ class HomeError extends HomeState {
 }
 
 class HomeIsLoading extends HomeState {}
+
+class HomePageChanged extends HomeState {}

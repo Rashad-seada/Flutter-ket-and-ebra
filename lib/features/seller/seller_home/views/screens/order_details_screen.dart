@@ -10,12 +10,14 @@ import '../../../../../core/views/widgets/space.dart';
 import '../../../../../generated/locale_keys.g.dart';
 import '../../../../variation/views/components/cloth_design_card.dart';
 import '../../../../variation/views/components/cloth_size_card.dart';
+import '../../data/entities/get_seller_orders_reponse.dart';
 import '../blocs/seller_home/seller_home_cubit.dart';
 import '../components/user_info_card.dart';
 
 
 class OrderDetailsScreen extends StatelessWidget {
-  const OrderDetailsScreen({super.key});
+  SellerOrder sellerOrder;
+  OrderDetailsScreen({super.key,required this.sellerOrder});
 
   @override
   Widget build(BuildContext context) {
@@ -48,19 +50,19 @@ class OrderDetailsScreen extends StatelessWidget {
               height: 2.h,
             ),
 
-            UserInfoCard(designModels: context.read<SellerHomeCubit>().userModels,),
+            UserInfoCard(designModels: context.read<SellerHomeCubit>().userModels(sellerOrder),),
 
             Space(
               height: 2.h,
             ),
 
-            ClothDesignCard(designModels: context.read<SellerHomeCubit>().designModels,),
+            ClothDesignCard(designModels: context.read<SellerHomeCubit>().designModels(sellerOrder),),
 
             Space(
               height: 2.h,
             ),
 
-            ClothSizeCard(sizeModels: context.read<SellerHomeCubit>().sizeModels,),
+            ClothSizeCard(sizeModels: context.read<SellerHomeCubit>().sizeModels(sellerOrder),),
 
             Space(
               height: 5.h,

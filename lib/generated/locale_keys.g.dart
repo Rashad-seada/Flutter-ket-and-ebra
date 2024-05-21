@@ -100,5 +100,15 @@ abstract class  LocaleKeys {
   static const image_pick = 'image_pick';
   static const name = 'name';
   static const description = 'description';
+  static const tailor_details = 'tailor_details';
+  static const accept = 'accept';
+  static const reject = 'reject';
+  static const pending_seller_request_sub_text = 'pending_seller_request_sub_text';
+  static const new_user_sub_text = 'new_user_sub_text';
+  static const monthly_income_sub_text = 'monthly_income_sub_text';
+  static const new_seller_sub_text = 'new_seller_sub_text';
+  static const home_ads = 'home_ads';
+  static const home_ads_sub_text = 'home_ads_sub_text';
+  static const register_seller_message = 'register_seller_message';
 
 }

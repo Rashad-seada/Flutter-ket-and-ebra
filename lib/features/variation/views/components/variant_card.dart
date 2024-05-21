@@ -34,10 +34,16 @@ class VariantCard extends StatelessWidget {
             Space(height: 1.5.h,),
 
 
-            Text(
-              title,
-              style: AppTheme.mainTextStyle(
-                  color: AppTheme.neutral900, fontSize: 10.sp),
+            SizedBox(
+              width: 14.w,
+              child: Text(
+                title,
+                style: AppTheme.mainTextStyle(
+                    color: AppTheme.neutral900, fontSize: 10.sp),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center
+              ),
             ),
 
           ],

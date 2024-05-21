@@ -54,6 +54,7 @@ class VariationRemoteDataSourceImpl implements VariationRemoteDataSource {
 
       Map<String,dynamic> responseData = response.data;
 
+      print(responseData);
 
       return GetAllSellersResponse.fromJson(responseData);
 
@@ -67,7 +68,7 @@ class VariationRemoteDataSourceImpl implements VariationRemoteDataSource {
     try {
 
       Response response = await _client.get(
-          AppConsts.url + AppConsts.getChestEndPoint,
+          AppConsts.url + AppConsts.getButtonEndPoint,
           queryParameters: {
             "SellerId": id
           }

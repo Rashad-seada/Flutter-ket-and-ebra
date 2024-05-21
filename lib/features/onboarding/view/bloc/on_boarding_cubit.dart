@@ -18,12 +18,8 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
 
   onNextClick(BuildContext context) {
     if (index == 2) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => AuthMethodsScreen()),
-        //(route) => false
-      );
-      //navigateToAuthMethodsScreen(context);
+      navigateToAuthMethodsScreen(context);
+
     } else {
       index += 1;
       controller.animateToPage(index,
@@ -36,10 +32,7 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
   }
 
   navigateToAuthMethodsScreen(BuildContext context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => AuthMethodsScreen()),
-        //(route) => false
-    );
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => AuthMethodsScreen()),);
+
   }
 }

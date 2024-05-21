@@ -29,32 +29,6 @@ class RegisterSellerUseCase {
           password: password,
           locationId: locationId,
           registerImg: registerImg,
-      ).then(
-              (value) => value.fold(
-                  (registerSellerError) {
-                return left(registerSellerError);
-              },
-                  (registerSellerResponse) async {
-
-                if(registerSellerResponse.obj?.token == null) {
-                  return left(RemoteDataFailure("The token returned with null", failureCode: 4));
-                }
-
-                final user =  getIt<TokenHelper>().userFromToken(registerSellerResponse.obj!.token!);
-
-                await getIt<AuthRepo>().setUser(user).then((value) => value.fold(
-                        (userError) {
-                      return left(userError);
-                    },
-                        (userSuccess) {
-
-                    }
-                )
-                );
-
-                return right(registerSellerResponse);
-
-              }
-          ));
+      );
   }
 }

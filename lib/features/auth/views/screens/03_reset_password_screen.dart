@@ -12,9 +12,11 @@ import '../../../../core/views/widgets/custom_text_field.dart';
 import '../../../../core/views/widgets/main_button.dart';
 import '../../../../core/views/widgets/space.dart';
 import '../../../../generated/locale_keys.g.dart';
+import '../../utils/register_type.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
-  const ResetPasswordScreen({super.key});
+  RegisterType registerType;
+  ResetPasswordScreen({super.key,required this.registerType});
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +101,7 @@ class ResetPasswordScreen extends StatelessWidget {
                 style: AppTheme.mainTextStyle(
                     color: AppTheme.neutral100, fontSize: 13.sp),
               ).tr(),
-              onTap: () => context.read<ResetPasswordCubit>().onResetClick(context),
+              onTap: () => context.read<ResetPasswordCubit>().onResetClick(context,registerType),
             ),
           ],
         ),

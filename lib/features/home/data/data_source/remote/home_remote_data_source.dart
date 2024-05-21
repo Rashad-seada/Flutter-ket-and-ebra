@@ -32,7 +32,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
 
 
       final response = await _client.get(
-          AppConsts.url + AppConsts.getHomeEndPoint,
+          AppConsts.url + AppConsts.getHomeByAdminEndPoint,
           headers: {
             "Authorization": "Bearer $token"
           }
@@ -48,7 +48,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
       return GetHomeResponse.fromJson(responseData,);
 
     } catch (e) {
-      throw RemoteDataException(e.toString());
+      throw RemoteDataException("حدث خطا غير متوقع. يرجى اعاده المحاوله");
     }
 
   }
@@ -65,7 +65,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
 
 
       final response = await _client.post(
-          AppConsts.url + AppConsts.setHomeAdEndPoint,
+          AppConsts.url + AppConsts.setHomeAdByAdminEndPoint,
           data: requestData,
           headers: {
             "Authorization": "Bearer $token"
@@ -82,7 +82,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
       return GetHomeResponse.fromJson(responseData,);
 
     } catch (e) {
-      throw RemoteDataException(e.toString());
+      throw RemoteDataException("حدث خطا غير متوقع. يرجى اعاده المحاوله");
     }
   }
 

@@ -12,6 +12,9 @@ import 'package:smart_soft/features/auth/views/screens/01_login_screen.dart';
 import 'package:smart_soft/features/auth/views/screens/04_otp_screen.dart';
 import 'package:smart_soft/features/auth/views/screens/05_message_screen.dart';
 
+import '../../../../../core/core_feature/data/entities/citie_entity.dart';
+import '../../../../../core/core_feature/data/entities/get_all_cities_response.dart';
+import '../../../../../core/core_feature/domain/usecases/get_all_cities_use_case.dart';
 import '../../../../../core/core_feature/domain/usecases/validate_password_use_case.dart';
 import '../../../../../core/core_feature/domain/usecases/validate_phone_use_case.dart';
 import '../../../../../core/core_feature/domain/usecases/validate_username_use_case.dart';
@@ -30,6 +33,9 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   Worker? job;
 
+  List<CityEntity> allCities = [];
+  CityEntity? selectedCity;
+
   TextEditingController usernameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController tradeRegisterController = TextEditingController();
@@ -43,23 +49,45 @@ class RegisterCubit extends Cubit<RegisterState> {
     return getIt<ValidateUsernameUseCase>().call(usernameController.text);
   }
 
+  getAllCities(){
+    emit(RegisterGettingCities());
+    getIt<GetAllCitiesUseCase>().call().then((value) => value.fold(
+            (error) {
+              print(error.message);
+              emit(RegisterGettingCitiesError());
+              getAllCities();
+            },
+            (success) {
+              allCities = success.obj ?? [];
+              selectedCity = success.obj?[0];
+              emit(RegisterInitial());
+
+            }
+    ));
+  }
+
+
   String? validatePhone() {
-    return getIt<ValidatePhoneUseCase>().call(phoneNumberController.text);
+    if(phoneNumberController.text.isEmpty){
+      return "يجب عليك ادخال الرقم الخاص بك";
+    } else if(int.tryParse(phoneNumberController.text) == null){
+      return "يجب ادخال ارقام فقط";
+    }
   }
 
   String? validateTradeRegister() {
     if (tradeRegisterController.text.trim().isEmpty) {
       return "Please Enter your trade register";
-    } else {
-      return null;
+    } else if(int.tryParse(tradeRegisterController.text) == null){
+      return "يجب ادخال ارقام فقط";
     }
   }
 
   String? validateTaxId() {
     if (taxIdController.text.trim().isEmpty) {
       return "Please Enter your Tax Id";
-    } else {
-      return null;
+    } else if(int.tryParse(taxIdController.text) == null){
+      return "يجب ادخال ارقام فقط";
     }
   }
 
@@ -69,6 +97,8 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   onRegisterClick(BuildContext context,RegisterType registerType) {
     if(formKey.currentState!.validate()){
+
+      // _sendOtp(context,registerType);
       _register(context,registerType);
     }
   }
@@ -105,18 +135,22 @@ class RegisterCubit extends Cubit<RegisterState> {
     switch (registerType){
 
       case RegisterType.RegisterCustomer:
-        print('1');
         _registerCustomer(context);
 
       case RegisterType.RegisterSeller :
-        print('2');
-
         _registerSeller(context);
     }
   }
 
   _registerSeller(BuildContext context) {
-    if(file == null){
+
+    if(selectedCity == null) {
+      showFlushBar(
+          context,
+          title: "Error",
+          message: "Please select your location"
+      );
+    } else if(file == null){
       showFlushBar(
           context,
           title: "Error",
@@ -131,16 +165,24 @@ class RegisterCubit extends Cubit<RegisterState> {
           tradeRegister: tradeRegisterController.text,
           taxId: taxIdController.text,
           password: passwordController.text,
-          locationId: 1.toString(),
-          registerImg: file!)
-          .then((value) => value.fold((error) {
+          locationId: selectedCity!.id.toString(),
+          registerImg: file!
+
+      ).then((value) => value.fold((error) {
         emit(RegisterError(error));
         showFlushBar(context,
             title: "Error ${error.failureCode}", message: error.message);
         emit(RegisterInitial());
       }, (success) {
         emit(RegisterSuccess());
-        _navigateToSellerHomeScreen(context);
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+            builder: (_)=> MessageScreen(
+              title: LocaleKeys.all_done.tr(),
+              description: LocaleKeys.register_seller_message.tr(),
+              onTap: (){
+                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=> AuthMethodsScreen()), (route) => false);
+              },
+            )), (route) => false);
         emit(RegisterInitial());
       }));
     }
@@ -166,7 +208,7 @@ class RegisterCubit extends Cubit<RegisterState> {
             }));
   }
 
-  _sendOtp(BuildContext context) {
+  _sendOtp(BuildContext context, RegisterType registerType) {
     emit(RegisterLoading());
     getIt<SendOtpUseCase>()
         .call(phoneNumberController.text)
@@ -177,7 +219,7 @@ class RegisterCubit extends Cubit<RegisterState> {
               emit(RegisterInitial());
             }, (success) {
               emit(RegisterSuccess());
-              _navigateToSellerHomeScreen(context);
+              _navigateToOtpScreen(context,registerType);
               emit(RegisterInitial());
             }));
   }
@@ -211,14 +253,15 @@ class RegisterCubit extends Cubit<RegisterState> {
   _navigateToSellerHomeScreen(BuildContext context) {
     Navigator.push(
         context, MaterialPageRoute(builder: (_) => SellerHomeScreen()));
+  }
 
-    _navigateToOtpScreen(BuildContext context) {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (_) => OtpScreen(
-                    phoneNumber: phoneNumberController.text,
-          )));
-    }
+  _navigateToOtpScreen(BuildContext context, RegisterType registerType) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (_) => OtpScreen(
+              phoneNumber: phoneNumberController.text,
+                registerType : registerType
+            )));
   }
 }

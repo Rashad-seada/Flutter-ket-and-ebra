@@ -2,7 +2,7 @@
 import 'package:smart_soft/features/seller/add_variation/data/entities/seller_entity.dart';
 
 class VariationEntity {
-  int? price;
+  num? price;
   String? imgUrl;
   int? sellerId;
   Seller? seller;

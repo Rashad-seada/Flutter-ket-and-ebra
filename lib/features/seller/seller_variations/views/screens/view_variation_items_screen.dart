@@ -6,34 +6,25 @@ import 'package:smart_soft/core/config/app_images.dart';
 import 'package:smart_soft/core/config/app_theme.dart';
 import 'package:smart_soft/core/views/widgets/custom_progress_indicator.dart';
 import 'package:smart_soft/generated/locale_keys.g.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../../core/views/widgets/custom_header.dart';
 import '../../../../../core/views/widgets/space.dart';
+import '../../data/utils/variants_enum.dart';
 import '../blocs/seller_variations/seller_variations_cubit.dart';
 import '../components/seller_variants_item.dart';
 import '../utils/variations_enum.dart';
 
-class ViewVariationItemsScreen extends StatefulWidget {
+class ViewVariationItemsScreen extends HookWidget {
   VariationsEnum variationsEnum;
 
   ViewVariationItemsScreen({super.key,required this.variationsEnum});
 
-  @override
-  State<ViewVariationItemsScreen> createState() => _ViewVariationItemsScreenState();
-}
-
-class _ViewVariationItemsScreenState extends State<ViewVariationItemsScreen> {
-
-  @override
-  void initState() {
-    context.read<SellerVariationsCubit>().getVariation(context, variationsEnum: widget.variationsEnum);
-    super.initState();
-  }
 
   String getLabel(){
-    switch(widget.variationsEnum){
+    switch(variationsEnum){
       case VariationsEnum.Fabric:
-      return LocaleKeys.fabric.tr();
+        return LocaleKeys.fabric.tr();
 
       case VariationsEnum.Collar:
         return LocaleKeys.collar.tr();
@@ -56,8 +47,40 @@ class _ViewVariationItemsScreenState extends State<ViewVariationItemsScreen> {
     };
   }
 
+  int getVariantType(){
+    switch(variationsEnum){
+
+      case VariationsEnum.Fabric:
+        return VariantsEnum.fabric;
+
+      case VariationsEnum.Collar:
+        return VariantsEnum.collar;
+
+      case VariationsEnum.FrontPocket:
+        return VariantsEnum.frontPocket;
+
+      case VariationsEnum.Chest:
+        return VariantsEnum.chest;
+
+      case VariationsEnum.Sleeve:
+        return VariantsEnum.sleeves;
+
+      case VariationsEnum.Button:
+        return VariantsEnum.buttons;
+
+      case VariationsEnum.Embroidery:
+        return VariantsEnum.embroidery;
+
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    useEffect(() {
+      context.read<SellerVariationsCubit>().getVariation(context, variationsEnum: variationsEnum);
+    }, []);
+
     return SafeArea(child: Scaffold(
       body: ListView(
         shrinkWrap: true,
@@ -76,13 +99,14 @@ class _ViewVariationItemsScreenState extends State<ViewVariationItemsScreen> {
           Space(
             height: 3.h,
           ),
-          
+
           BlocConsumer<SellerVariationsCubit,SellerVariationsState>(
             listener: (context, state) {},
             builder: (context, state) {
 
               if(state is SellerVariationsIsLoading){
                 return CustomProgressIndicator();
+
               } else if(state is SellerVariationsError){
                 return Text(SellerVariationsError.failure.message);
 
@@ -108,7 +132,7 @@ class _ViewVariationItemsScreenState extends State<ViewVariationItemsScreen> {
                         child: Text(
                           LocaleKeys.empty_seller_item,
                           style: AppTheme.mainTextStyle(
-                              color: AppTheme.neutral500, fontSize: 12.sp,),
+                            color: AppTheme.neutral500, fontSize: 12.sp,),
                           textAlign: TextAlign.center,
 
                         ).tr(),
@@ -116,16 +140,22 @@ class _ViewVariationItemsScreenState extends State<ViewVariationItemsScreen> {
 
                     ],
                   );
+
                 }
                 return ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: SellerVariationsSuccess.sellerVariationModels?.length ?? 0,
-                    itemBuilder: (context,index){
-                      return SellerVariantsItem(sellerVariationModel: SellerVariationsSuccess.sellerVariationModels![index]);
-                    });
-              }
+                  shrinkWrap: true,
+                  itemCount: SellerVariationsSuccess.sellerVariationModels?.length ?? 0,
+                  itemBuilder: (context,index){
+                    return SellerVariantsItem(
+                        sellerVariationModel: SellerVariationsSuccess.sellerVariationModels![index],
+                        onDelete: (){
+                          context.read<SellerVariationsCubit>().onDelete(context,getVariantType(),SellerVariationsSuccess.sellerVariationModels![index].id.toInt(),variationsEnum);
+                        },
+                    );
+                  });
+                }
 
-              return SizedBox();
+              return const SizedBox();
             },
           )
 
@@ -133,9 +163,11 @@ class _ViewVariationItemsScreenState extends State<ViewVariationItemsScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppTheme.primary900,
-        onPressed: () { context.read<SellerVariationsCubit>().onAddTap(context, variationsEnum: widget.variationsEnum); },
+        onPressed: () { context.read<SellerVariationsCubit>().onAddTap(context, variationsEnum: variationsEnum); },
         child: Text("+",style: TextStyle(fontSize: 20.sp,color: AppTheme.neutral100),),
       ),
     ));
   }
+
 }
+

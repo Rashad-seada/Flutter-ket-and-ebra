@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smart_soft/features/admin/admin_home/views/bloc/admin_home/admin_home_cubit.dart';
+import 'package:smart_soft/features/admin/admin_home/views/bloc/seller_details/seller_details_cubit.dart';
 import 'package:smart_soft/features/auth/views/blocs/otp/otp_cubit.dart';
 import 'package:smart_soft/features/auth/views/blocs/reset_password/reset_password_cubit.dart';
+import 'package:smart_soft/features/auth/views/screens/intro_screen.dart';
 import 'package:smart_soft/features/cart/views/blocs/cart/cart_cubit.dart';
 import 'package:smart_soft/features/home/views/bloc/home/home_cubit.dart';
 import 'package:smart_soft/features/order/views/blocs/get_orders/get_orders_cubit.dart';
@@ -22,11 +24,13 @@ import 'package:smart_soft/features/variation/views/bloc/sleeve/sleeve_cubit.dar
 import 'package:smart_soft/features/variation/views/bloc/variation/variation_cubit.dart';
 import 'core/bloc/core_cubit.dart';
 import 'core/config/app_theme.dart';
+import 'features/admin/admin_home/views/bloc/add_ads/add_ads_cubit.dart';
+import 'features/admin/admin_home/views/bloc/home_ads/home_ads_cubit.dart';
 import 'features/auth/views/blocs/login/login_cubit.dart';
 import 'features/auth/views/blocs/register/register_cubit.dart';
 
 import 'features/onboarding/view/bloc/on_boarding_cubit.dart';
-import 'features/onboarding/view/screens/00_on_boarding_screen.dart';
+import 'features/seller/seller_home/views/blocs/seller/seller_cubit.dart';
 import 'features/seller/seller_home/views/blocs/seller_home/seller_home_cubit.dart';
 import 'features/seller/seller_variations/views/blocs/seller_variations/seller_variations_cubit.dart';
 import 'generated/codegen_loader.g.dart';
@@ -78,6 +82,10 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => OrderCubit()),
         BlocProvider(create: (_) => GetOrdersCubit()),
         BlocProvider(create: (_) => AddVariationCubit()),
+        BlocProvider(create: (_) => SellerCubit()),
+        BlocProvider(create: (_) => SellerDetailsCubit()),
+        BlocProvider(create: (_) => HomeAdsCubit()),
+        BlocProvider(create: (_) => AddAdsCubit()),
 
       ],
       child: Sizer(
@@ -88,7 +96,7 @@ class MyApp extends StatelessWidget {
             supportedLocales: context.supportedLocales,
             locale: context.locale,
             debugShowCheckedModeBanner: false,
-            home: const OnBoardingScreen(),
+            home: const IntroScreen() ,
             theme: AppTheme.theme(context),
           );
         },

@@ -10,7 +10,7 @@ import '../../../../core/views/widgets/custom_network_image.dart';
 class ButtonCard extends StatelessWidget {
   String title;
   String imgUrl;
-  double price;
+  num price;
   void Function()? onTap;
   ButtonCard({super.key,required this.title,required this.imgUrl,required this.price, this.onTap});
 
@@ -76,7 +76,8 @@ class ButtonCard extends StatelessWidget {
                 Text(
                   price.toString(),
                   style: AppTheme.mainTextStyle(
-                      color: AppTheme.primary900, fontSize: 14.sp),
+                      color: AppTheme.primary900, fontSize: 14.sp
+                  ),
                 ),
 
               ],

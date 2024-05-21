@@ -10,6 +10,7 @@ import 'package:smart_soft/features/admin/admin_home/views/bloc/admin_home/admin
 import 'package:smart_soft/generated/locale_keys.g.dart';
 
 import '../../../../../core/config/app_images.dart';
+import '../../../../home/views/bloc/home/home_cubit.dart';
 import '../../../../seller/seller_home/views/blocs/seller_home/seller_home_cubit.dart';
 
 
@@ -51,27 +52,17 @@ class AdminDrawer extends StatelessWidget {
           Container(
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppTheme.neutral200
+                shape: BoxShape.circle
             ),
-            child: CustomNetworkImage(
-                height: 30.w,
-                width: 30.w,
-                url:
-                    "https://lh3.googleusercontent.com/a-/AOh14GhyC2FdaIRf4PwoQD4Q4JAvt26d0h-Qnl7iJ8pfdw=k-s256"),
-          ),
+            child: Image.asset(
+              AppImages.authMethods,
+              height: 30.w,
+              width: 30.w,
 
-          Space(
-            height: 2.h,
-          ),
-
-          Center(
-            child: Text(
-              "رشاد محمد عاطف",
-              style: AppTheme.mainTextStyle(
-                  color: AppTheme.neutral900, fontSize: 13.sp),
             ),
           ),
+
+
 
           Space(
             height: 3.h,
@@ -89,54 +80,23 @@ class AdminDrawer extends StatelessWidget {
           ),
 
           InkWell(
-            onTap: ()=> context.read<SellerHomeCubit>().onProfileClick(context),
+            onTap: ()=> context.read<HomeCubit>().onLogoutTap(context),
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.w),
               child: Row(
                 children: [
-                  SvgPicture.asset(
-                    fit: BoxFit.fitWidth,
-                    AppImages.profile,
-                    width: 6.w,
-                    height: 6.w,
+
+                  Icon(
+                    Icons.logout,
+                    size: 6.w,
                     color: AppTheme.neutral900,
                   ),
                   Space(
                     width: 3.w,
                   ),
-                  Text(
-                    LocaleKeys.profile,
-                    style: AppTheme.mainTextStyle(
-                        color: AppTheme.neutral900, fontSize: 13.sp),
-                  ).tr(),
-                ],
-              ),
-            ),
-          ),
 
-          Space(
-            height: 2.5.h,
-          ),
-
-          InkWell(
-            onTap: ()=> context.read<SellerHomeCubit>().closeDrawer(context),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.w),
-              child: Row(
-                children: [
-                  SvgPicture.asset(
-                    fit: BoxFit.fitWidth,
-                    AppImages.order,
-                    width: 6.w,
-                    height: 6.w,
-                    color: AppTheme.neutral900,
-                  ),
-                  Space(
-                    width: 3.w,
-                  ),
-            
                   Text(
-                    LocaleKeys.order,
+                    "Logout",
                     style: AppTheme.mainTextStyle(
                         color: AppTheme.neutral900, fontSize: 13.sp),
                   ).tr(),

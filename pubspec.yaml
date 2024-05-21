@@ -52,7 +52,7 @@ dependencies:
 
   # Services
   image_picker:
-  connectivity_plus: 5.0.2
+  flutter_network_connectivity:
   get_it:
 
   # Firebase
@@ -71,6 +71,10 @@ dependencies:
   pinput:
   cached_network_image:
   flutter_rating_bar:
+  flutter_hooks:
+  flutter_launcher_icons: ^0.13.1
+
+
 
   # Service
   jwt_decoder: 
@@ -80,6 +84,11 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
+flutter_icons:
+  image_path: "images/auth_methods.png"
+  android: true
+  ios: true
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -88,6 +97,8 @@ dev_dependencies:
   hive_generator:
 
   build_runner:
+
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

@@ -126,5 +126,18 @@
 
   "image_pick": "Please tap here to pick up an image",
   "name": "Name of the variant",
-  "description": "Description about the variant"
+  "description": "Description about the variant",
+  "tailor_details": "Tailor details",
+  "accept": "Accept",
+  "reject": "Reject",
+
+  "pending_seller_request_sub_text": "this is the number of sellers that applied to join the app",
+  "new_user_sub_text": "this is the number of users that joined the app",
+  "monthly_income_sub_text": "this is the monthly income throw the app",
+  "new_seller_sub_text": "this is the number of new sellers that joined the app",
+  "home_ads": "Home ads",
+  "home_ads_sub_text": "you can set home ads from here",
+
+  "register_seller_message": "Your details is being review by the admin, you will be able to login once you been approved"
+
 }

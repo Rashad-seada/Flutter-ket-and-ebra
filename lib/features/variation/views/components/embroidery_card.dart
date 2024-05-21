@@ -10,7 +10,7 @@ import '../../../../core/views/widgets/custom_network_image.dart';
 class EmbroideryCard extends StatelessWidget {
   String title;
   String imgUrl;
-  double price;
+  num price;
   void Function()? onTap;
   EmbroideryCard({super.key,required this.title,required this.imgUrl,required this.price, this.onTap});
 

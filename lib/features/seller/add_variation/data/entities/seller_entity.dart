@@ -8,11 +8,11 @@ class Seller {
   String? phoneNumber;
   int? userId;
   int? cityId;
-  Null? location;
-  Null? profileImg;
+  int? location;
+  String? profileImg;
   int? id;
   String? name;
-  Null? description;
+  String? description;
 
   Seller(
       {this.comNo,
