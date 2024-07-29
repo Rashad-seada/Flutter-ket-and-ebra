@@ -15,7 +15,16 @@ part 'sleeve_state.dart';
 class SleeveCubit extends Cubit<SleeveState> {
   SleeveCubit() : super(SleeveInitial());
 
-  int sleeveId = -1;
+  int sleeveId = 0;
+  List<String> sleeves = [
+    "images/sleeve1.png",
+    "images/sleeve2.png",
+    "images/sleeve3.png",
+    "images/sleeve4.png",
+    "images/sleeve5.png",
+    "images/sleeve6.png",
+
+  ];
 
 
   getSleeve(BuildContext context){
@@ -34,6 +43,12 @@ class SleeveCubit extends Cubit<SleeveState> {
 
   void onSleeveTap(int sleeveId, BuildContext context) {
     this.sleeveId = sleeveId;
+    emit(SleeveSelected());
+    //context.read<VariationCubit>().onSleeveNextClick(context);
+  }
+
+  next(BuildContext context){
     context.read<VariationCubit>().onSleeveNextClick(context);
+
   }
 }

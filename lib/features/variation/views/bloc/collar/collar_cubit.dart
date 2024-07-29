@@ -14,8 +14,14 @@ part 'collar_state.dart';
 class CollarCubit extends Cubit<CollarState> {
   CollarCubit() : super(CollarInitial());
 
-  int collarId = -1;
+  int collarId =0;
 
+  List<String> collars = [
+    "images/yaka1.png",
+    "images/yaka2.png",
+    "images/yaka3.png",
+    "images/yaka4.png"
+  ];
 
   getCollars(BuildContext context){
     emit(CollarIsLoading());
@@ -34,7 +40,13 @@ class CollarCubit extends Cubit<CollarState> {
 
   void onCollarCardTap(int collarId, BuildContext context) {
     this.collarId = collarId;
+    emit(CollarSelected());
+    //context.read<VariationCubit>().onCollarNextClick(context);
+  }
+
+  next(BuildContext context){
     context.read<VariationCubit>().onCollarNextClick(context);
+
   }
 
 }

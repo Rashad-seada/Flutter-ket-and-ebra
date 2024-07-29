@@ -25,3 +25,6 @@ class FrontPocketError extends FrontPocketState {
 }
 
 class FrontPocketIsLoading extends FrontPocketState {}
+
+
+class FrontPocketSelected extends FrontPocketState {}

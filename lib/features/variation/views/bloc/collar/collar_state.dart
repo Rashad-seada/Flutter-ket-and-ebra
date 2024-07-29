@@ -25,3 +25,7 @@ class CollarError extends CollarState {
 }
 
 class CollarIsLoading extends CollarState {}
+
+
+class CollarSelected extends CollarState {}
+

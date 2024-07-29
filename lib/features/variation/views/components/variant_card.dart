@@ -25,12 +25,16 @@ class VariantCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-
-            CustomNetworkImage(
-              url: imgUrl,
+            Image.asset(
+               imgUrl,
               width: 12.w,
               height: 12.w,
             ),
+            // CustomNetworkImage(
+            //   url: imgUrl,
+            //   width: 12.w,
+            //   height: 12.w,
+            // ),
             Space(height: 1.5.h,),
 
 

@@ -26,3 +26,5 @@ class SleeveError extends SleeveState {
 }
 
 class SleeveIsLoading extends SleeveState {}
+
+class SleeveSelected extends SleeveState {}

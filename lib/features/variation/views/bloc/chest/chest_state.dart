@@ -26,3 +26,6 @@ class ChestError extends ChestState {
 }
 
 class ChestIsLoading extends ChestState {}
+
+
+class ChestSelected extends ChestState {}

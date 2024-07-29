@@ -15,8 +15,18 @@ part 'chest_state.dart';
 class ChestCubit extends Cubit<ChestState> {
   ChestCubit() : super(ChestInitial());
 
-  int chestId = -1;
+ // int chestId = -1;
+  int chestId =0;
 
+  List<String> chests = [
+    "images/chest1.png",
+    "images/chest2.png",
+    "images/chest3.png",
+    "images/chest4.png",
+    "images/chest5.png",
+    "images/chest6.png",
+
+  ];
 
   getChest(BuildContext context){
     emit(ChestIsLoading());
@@ -34,7 +44,12 @@ class ChestCubit extends Cubit<ChestState> {
 
   void onChestTap(int chestId, BuildContext context) {
     this.chestId = chestId;
-    context.read<VariationCubit>().onChestNextClick(context);
+    emit(ChestSelected());
+    //context.read<VariationCubit>().onChestNextClick(context);
   }
 
+  next(BuildContext context){
+    context.read<VariationCubit>().onChestNextClick(context);
+
+  }
 }

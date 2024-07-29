@@ -1,18 +1,19 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smart_soft/core/config/app_theme.dart';
 import 'package:smart_soft/core/views/widgets/custom_progress_indicator.dart';
+import 'package:smart_soft/core/views/widgets/main_button.dart';
 import 'package:smart_soft/features/variation/views/bloc/collar/collar_cubit.dart';
 
 import '../../../../core/config/app_consts.dart';
-import '../../../../core/config/app_images.dart';
+import '../../../../core/config/app_theme.dart';
 import '../../../../core/views/widgets/custom_error_component.dart';
 import '../../../../core/views/widgets/custom_header.dart';
 import '../../../../core/views/widgets/space.dart';
 import '../../../../generated/locale_keys.g.dart';
+import '../bloc/chest/chest_cubit.dart';
+import '../bloc/front_pocket/front_pocket_cubit.dart';
 import '../components/variant_card.dart';
 
 class CollarScreen extends StatefulWidget {
@@ -26,6 +27,7 @@ class _CollarScreenState extends State<CollarScreen> {
   @override
   void initState() {
     context.read<CollarCubit>().getCollars(context);
+
     super.initState();
   }
 
@@ -33,6 +35,20 @@ class _CollarScreenState extends State<CollarScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: MainButton(
+          color: AppTheme.primary900,
+          width: 86.w,
+          height: 6.5.h,
+          label: Text(
+            LocaleKeys.next,
+            style: AppTheme.mainTextStyle(
+                color: AppTheme.neutral100, fontSize: 13.sp),
+          ).tr(),
+          onTap: () => context.read<CollarCubit>().next(context),
+        ),
+      ),
       body: ListView(
         shrinkWrap: true,
         children: [
@@ -51,6 +67,7 @@ class _CollarScreenState extends State<CollarScreen> {
           BlocConsumer<CollarCubit, CollarState>(
             listener: (context, state) {},
             builder: (context, state) {
+              int collarId = context.read<CollarCubit>().collarId;
               if (state is CollarIsLoading) {
                 return CustomProgressIndicator();
               } else if (state is CollarError) {
@@ -60,7 +77,7 @@ class _CollarScreenState extends State<CollarScreen> {
                     context.read<CollarCubit>().getCollars(context);
                   },
                 );
-              } else if (state is CollarSuccess) {
+              } else if (state is CollarSuccess || state is CollarSelected) {
                 return Column(
                   children: [
                     Space(
@@ -76,15 +93,39 @@ class _CollarScreenState extends State<CollarScreen> {
                           fit: BoxFit.contain,
                         ),
                         Positioned(
+                          top: 80,
+                          right: 40,
+                          child: Image.asset(
+                            context.read<FrontPocketCubit>().frontPockets[
+                            context.read<FrontPocketCubit>().frontPocketId],
+                            width: 100,
+                            height: 100,
+                          ),
+                        ),
+                        Positioned(
                           top: 0,
                           right: 0,
-                          left:0,
+                          left: 0,
                           child: Image.asset(
-                            "images/yaka.png",
+                            context.read<CollarCubit>().collars[
+                            context.read<CollarCubit>().collarId],
+                            width: 80,
+                            height: 80,
+                          ),
+                        ),
+                        Positioned(
+                          top: 0,
+                          right: 0,
+                          bottom: 0,
+                          left: 0,
+                          child: Image.asset(
+                            context.read<ChestCubit>().chests[
+                            context.read<ChestCubit>().chestId],
                             width: 80,
                             height: 80,
                           ),
                         )
+
                       ],
                     ),
                     // SvgPicture.asset(
@@ -109,20 +150,23 @@ class _CollarScreenState extends State<CollarScreen> {
                         mainAxisSpacing: 3.w, // Spacing between rows
                       ),
                       //padding: EdgeInsets.all(10.0), // Padding around the GridView
-                      itemCount: CollarSuccess.collars.length,
+                      itemCount: context.read<CollarCubit>().collars.length,
+                      //CollarSuccess.collars.length,
                       // Number of items
                       itemBuilder: (BuildContext context, int index) {
                         // Function that returns a widget for each item
                         return VariantCard(
-                            isSelect: index == 0,
-                            title:
-                                CollarSuccess.collars[index].name ?? "unknown",
-                            imgUrl: AppConsts.imgUrl +
-                                CollarSuccess.collars[index].imgUrl.toString(),
-                            onTap: () => context
-                                .read<CollarCubit>()
-                                .onCollarCardTap(
-                                    CollarSuccess.collars[index].id ?? -1,
+                            isSelect: index == collarId,
+                            title: "yaka$index",
+                            //CollarSuccess.collars[index].name ?? "unknown",
+                            imgUrl: context.read<CollarCubit>().collars[index],
+                            // AppConsts.imgUrl +
+                            //     CollarSuccess.collars[index].imgUrl.toString(),
+                            onTap: () =>
+                                context.read<CollarCubit>().onCollarCardTap(
+                                    // CollarSuccess.collars[index].id ?? -1,
+                                    // context
+                                    index,
                                     context));
                       },
                     ),

@@ -15,8 +15,18 @@ part 'front_pocket_state.dart';
 class FrontPocketCubit extends Cubit<FrontPocketState> {
   FrontPocketCubit() : super(FrontPocketInitial());
 
-  int frontPocketId = -1;
+  int frontPocketId = 0;
+  //-1;
+  List<String> frontPockets = [
+    "images/pocket1.png",
+    "images/pocket2.png",
+    "images/pocket3.png",
+    "images/pocket4.png",
+    "images/pocket5.png",
+    "images/pocket6.png",
+    "images/pocket7.png",
 
+  ];
 
   getFrontPocket(BuildContext context){
     emit(FrontPocketIsLoading());
@@ -34,7 +44,13 @@ class FrontPocketCubit extends Cubit<FrontPocketState> {
 
   void onFrontPocketCardTap(int frontPocketId, BuildContext context) {
     this.frontPocketId = frontPocketId;
+    emit(FrontPocketSelected());
+    //context.read<VariationCubit>().onFrontPocketNextClick(context);
+  }
+
+  next(BuildContext context){
     context.read<VariationCubit>().onFrontPocketNextClick(context);
+
   }
 
 }
