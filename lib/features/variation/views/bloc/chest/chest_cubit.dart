@@ -52,4 +52,8 @@ class ChestCubit extends Cubit<ChestState> {
     context.read<VariationCubit>().onChestNextClick(context);
 
   }
+
+  refresh(){
+    emit(RefreshChestScreen());
+  }
 }

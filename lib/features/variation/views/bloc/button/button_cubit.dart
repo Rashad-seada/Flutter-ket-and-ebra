@@ -18,6 +18,8 @@ class ButtonCubit extends Cubit<ButtonState> {
   int buttonId = -1;
 
 
+
+
   getButton(BuildContext context){
     emit(ButtonIsLoading());
     getIt<GetButtonBySellerIdUseCase>().call(context.read<VariationCubit>().selectedSellerId).then(
@@ -35,6 +37,11 @@ class ButtonCubit extends Cubit<ButtonState> {
 
   void onButtonTap(int buttonId, BuildContext context) {
     this.buttonId = buttonId;
+    //context.read<VariationCubit>().onButtonNextClick(context);
+  }
+
+  next(BuildContext context){
     context.read<VariationCubit>().onButtonNextClick(context);
+
   }
 }

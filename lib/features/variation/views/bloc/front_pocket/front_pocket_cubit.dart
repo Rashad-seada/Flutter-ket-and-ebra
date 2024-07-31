@@ -53,4 +53,8 @@ class FrontPocketCubit extends Cubit<FrontPocketState> {
 
   }
 
+  refresh(){
+    emit(RefreshFrontPocketScreen());
+  }
+
 }

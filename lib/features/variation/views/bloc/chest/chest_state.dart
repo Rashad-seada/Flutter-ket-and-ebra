@@ -29,3 +29,5 @@ class ChestIsLoading extends ChestState {}
 
 
 class ChestSelected extends ChestState {}
+
+class RefreshChestScreen extends ChestState {}

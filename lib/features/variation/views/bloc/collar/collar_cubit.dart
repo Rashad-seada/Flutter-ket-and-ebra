@@ -14,7 +14,7 @@ part 'collar_state.dart';
 class CollarCubit extends Cubit<CollarState> {
   CollarCubit() : super(CollarInitial());
 
-  int collarId =0;
+  int collarId = 0;
 
   List<String> collars = [
     "images/yaka1.png",
@@ -23,19 +23,15 @@ class CollarCubit extends Cubit<CollarState> {
     "images/yaka4.png"
   ];
 
-  getCollars(BuildContext context){
+  getCollars(BuildContext context) {
     emit(CollarIsLoading());
-    getIt<GetCollarBySellerIdUseCase>().call(context.read<VariationCubit>().selectedSellerId).then(
-            (value) => value.fold(
-                (error) {
+    getIt<GetCollarBySellerIdUseCase>()
+        .call(context.read<VariationCubit>().selectedSellerId)
+        .then((value) => value.fold((error) {
               emit(CollarError(error));
-
-            },
-                (success) {
+            }, (success) {
               emit(CollarSuccess(success.obj ?? []));
-
-            }
-        ));
+            }));
   }
 
   void onCollarCardTap(int collarId, BuildContext context) {
@@ -44,9 +40,11 @@ class CollarCubit extends Cubit<CollarState> {
     //context.read<VariationCubit>().onCollarNextClick(context);
   }
 
-  next(BuildContext context){
+  next(BuildContext context) {
     context.read<VariationCubit>().onCollarNextClick(context);
-
   }
 
+  refresh(){
+    emit(RefreshCollarScreen());
+  }
 }
