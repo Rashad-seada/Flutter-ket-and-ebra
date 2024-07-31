@@ -28,3 +28,5 @@ class FrontPocketIsLoading extends FrontPocketState {}
 
 
 class FrontPocketSelected extends FrontPocketState {}
+
+class RefreshFrontPocketScreen extends FrontPocketState {}

@@ -5,8 +5,6 @@ import 'package:sizer/sizer.dart';
 import 'package:smart_soft/core/views/widgets/custom_progress_indicator.dart';
 import 'package:smart_soft/core/views/widgets/main_button.dart';
 import 'package:smart_soft/features/variation/views/bloc/collar/collar_cubit.dart';
-
-import '../../../../core/config/app_consts.dart';
 import '../../../../core/config/app_theme.dart';
 import '../../../../core/views/widgets/custom_error_component.dart';
 import '../../../../core/views/widgets/custom_header.dart';
@@ -14,6 +12,7 @@ import '../../../../core/views/widgets/space.dart';
 import '../../../../generated/locale_keys.g.dart';
 import '../bloc/chest/chest_cubit.dart';
 import '../bloc/front_pocket/front_pocket_cubit.dart';
+import '../bloc/sleeve/sleeve_cubit.dart';
 import '../components/variant_card.dart';
 
 class CollarScreen extends StatefulWidget {
@@ -77,7 +76,7 @@ class _CollarScreenState extends State<CollarScreen> {
                     context.read<CollarCubit>().getCollars(context);
                   },
                 );
-              } else if (state is CollarSuccess || state is CollarSelected) {
+              } else if (state is CollarSuccess || state is CollarSelected || state is RefreshCollarScreen) {
                 return Column(
                   children: [
                     Space(
@@ -97,7 +96,7 @@ class _CollarScreenState extends State<CollarScreen> {
                           right: 40,
                           child: Image.asset(
                             context.read<FrontPocketCubit>().frontPockets[
-                            context.read<FrontPocketCubit>().frontPocketId],
+                                context.read<FrontPocketCubit>().frontPocketId],
                             width: 100,
                             height: 100,
                           ),
@@ -107,8 +106,9 @@ class _CollarScreenState extends State<CollarScreen> {
                           right: 0,
                           left: 0,
                           child: Image.asset(
-                            context.read<CollarCubit>().collars[
-                            context.read<CollarCubit>().collarId],
+                            context
+                                .read<CollarCubit>()
+                                .collars[context.read<CollarCubit>().collarId],
                             width: 80,
                             height: 80,
                           ),
@@ -119,13 +119,25 @@ class _CollarScreenState extends State<CollarScreen> {
                           bottom: 0,
                           left: 0,
                           child: Image.asset(
-                            context.read<ChestCubit>().chests[
-                            context.read<ChestCubit>().chestId],
+                            context
+                                .read<ChestCubit>()
+                                .chests[context.read<ChestCubit>().chestId],
                             width: 80,
                             height: 80,
                           ),
+                        ),
+                        Positioned(
+                          top: 110,
+                          left: 30,
+                          child: Image.asset(
+                            context
+                                .read<SleeveCubit>()
+                                .sleeves[context.read<SleeveCubit>().sleeveId],
+                            width: 120,
+                            height: 100,
+                            fit: BoxFit.cover,
+                          ),
                         )
-
                       ],
                     ),
                     // SvgPicture.asset(
@@ -174,7 +186,7 @@ class _CollarScreenState extends State<CollarScreen> {
                 );
               }
 
-              return SizedBox();
+              return const SizedBox();
             },
           ),
         ],

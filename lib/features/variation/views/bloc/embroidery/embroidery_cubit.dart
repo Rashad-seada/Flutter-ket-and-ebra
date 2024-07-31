@@ -33,7 +33,12 @@ class EmbroideryCubit extends Cubit<EmbroideryState> {
 
   void onEmbroideryTap(int embroideryId, BuildContext context) {
     this.embroideryId = embroideryId;
+   // context.read<VariationCubit>().onEmbroideryNextClick(context);
+  }
+
+  next(BuildContext context){
     context.read<VariationCubit>().onEmbroideryNextClick(context);
+
   }
 
 }

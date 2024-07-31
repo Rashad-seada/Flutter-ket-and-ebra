@@ -10,7 +10,8 @@ class CustomHeader extends StatelessWidget {
   String title;
   bool showCart;
   bool showBackButton;
-  CustomHeader({super.key,this.title = "Title",this.showCart = true,this.showBackButton = true});
+  Function()? onPop;
+  CustomHeader({super.key,this.title = "Title",this.showCart = true,this.showBackButton = true, this.onPop });
 
   pop(BuildContext context){
     Navigator.pop(context);
@@ -30,7 +31,12 @@ class CustomHeader extends StatelessWidget {
         InkWell(
           borderRadius: BorderRadius.circular(100.w),
           onTap: () {
-            pop(context);
+            if(onPop == null){
+              pop(context);
+            }else{
+              onPop!();
+              Navigator.pop(context);
+            }
           },
           child: SvgPicture.asset(
             AppImages.arrow,

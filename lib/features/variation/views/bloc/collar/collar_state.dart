@@ -29,3 +29,6 @@ class CollarIsLoading extends CollarState {}
 
 class CollarSelected extends CollarState {}
 
+
+class RefreshCollarScreen extends CollarState{}
+
