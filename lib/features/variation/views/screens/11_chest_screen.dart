@@ -120,11 +120,11 @@ class _ChestScreenState extends State<ChestScreen> {
                             top: 0,
                             right: 0,
                             left: 0,
-                            child: Image.asset(
+                            child: SvgPicture.asset(
                               context.read<CollarCubit>().collars[
                                   context.read<CollarCubit>().collarId],
-                              width: 80,
-                              height: 80,
+                              width: 40,
+                              height: 40,
                             ),
                           ),
                           Positioned(

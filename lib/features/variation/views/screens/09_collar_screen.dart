@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smart_soft/core/views/widgets/custom_progress_indicator.dart';
 import 'package:smart_soft/core/views/widgets/main_button.dart';
@@ -76,7 +77,9 @@ class _CollarScreenState extends State<CollarScreen> {
                     context.read<CollarCubit>().getCollars(context);
                   },
                 );
-              } else if (state is CollarSuccess || state is CollarSelected || state is RefreshCollarScreen) {
+              } else if (state is CollarSuccess ||
+                  state is CollarSelected ||
+                  state is RefreshCollarScreen) {
                 return Column(
                   children: [
                     Space(
@@ -105,12 +108,12 @@ class _CollarScreenState extends State<CollarScreen> {
                           top: 0,
                           right: 0,
                           left: 0,
-                          child: Image.asset(
+                          child: SvgPicture.asset(
                             context
                                 .read<CollarCubit>()
                                 .collars[context.read<CollarCubit>().collarId],
-                            width: 80,
-                            height: 80,
+                            width: 40,
+                            height: 40,
                           ),
                         ),
                         Positioned(
@@ -118,7 +121,7 @@ class _CollarScreenState extends State<CollarScreen> {
                           right: 0,
                           bottom: 0,
                           left: 0,
-                          child: Image.asset(
+                          child: SvgPicture.asset(
                             context
                                 .read<ChestCubit>()
                                 .chests[context.read<ChestCubit>().chestId],

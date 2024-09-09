@@ -25,7 +25,6 @@ class IntroScreen extends StatefulWidget {
 }
 
 class _IntroScreenState extends State<IntroScreen> {
-
   @override
   void initState() {
     context.read<CoreCubit>().getUser(context);
@@ -42,11 +41,9 @@ class _IntroScreenState extends State<IntroScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-
             Space(
               height: 4.h,
             ),
-
             Center(
               child: Image.asset(
                 AppImages.authMethods,
@@ -54,11 +51,9 @@ class _IntroScreenState extends State<IntroScreen> {
                 height: 23.h,
               ),
             ),
-
             Space(
               height: 3.h,
             ),
-
             CustomProgressIndicator()
           ],
         ),

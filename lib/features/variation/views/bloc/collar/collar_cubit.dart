@@ -17,10 +17,11 @@ class CollarCubit extends Cubit<CollarState> {
   int collarId = 0;
 
   List<String> collars = [
-    "images/yaka1.png",
-    "images/yaka2.png",
-    "images/yaka3.png",
-    "images/yaka4.png"
+    "images/yaka0.svg",
+    "images/yaka1.svg",
+    "images/yaka2.svg",
+    "images/yaka3.svg"
+
   ];
 
   getCollars(BuildContext context) {
@@ -44,7 +45,7 @@ class CollarCubit extends Cubit<CollarState> {
     context.read<VariationCubit>().onCollarNextClick(context);
   }
 
-  refresh(){
+  refresh() {
     emit(RefreshCollarScreen());
   }
 }

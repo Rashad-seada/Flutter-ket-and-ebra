@@ -36,18 +36,14 @@ import 'features/seller/seller_variations/views/blocs/seller_variations/seller_v
 import 'generated/codegen_loader.g.dart';
 
 void main() async {
+  await CoreCubit.setupApp();
 
-   await CoreCubit.setupApp();
-
-   runApp(
-   EasyLocalization(
-       supportedLocales: const [Locale('en'), Locale('ar')],
-       fallbackLocale: const Locale('en'),
-       assetLoader: const CodegenLoader(),
-       path: "assets/translations/",
-       child: const MyApp())
-   );
-
+  runApp(EasyLocalization(
+      supportedLocales: const [Locale('en'), Locale('ar')],
+      fallbackLocale: const Locale('en'),
+      assetLoader: const CodegenLoader(),
+      path: "assets/translations/",
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -57,7 +53,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-
         BlocProvider(create: (_) => CoreCubit()),
         BlocProvider(create: (_) => OnBoardingCubit()),
         BlocProvider(create: (_) => LoginCubit()),
@@ -86,7 +81,6 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => SellerDetailsCubit()),
         BlocProvider(create: (_) => HomeAdsCubit()),
         BlocProvider(create: (_) => AddAdsCubit()),
-
       ],
       child: Sizer(
         builder: (BuildContext context, Orientation orientation,
@@ -96,7 +90,7 @@ class MyApp extends StatelessWidget {
             supportedLocales: context.supportedLocales,
             locale: context.locale,
             debugShowCheckedModeBanner: false,
-            home: const IntroScreen() ,
+            home: const IntroScreen(),
             theme: AppTheme.theme(context),
           );
         },

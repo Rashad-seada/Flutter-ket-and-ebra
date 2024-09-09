@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smart_soft/core/config/app_theme.dart';
 import 'package:smart_soft/core/views/widgets/custom_network_image.dart';
@@ -25,10 +26,16 @@ class VariantCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-               imgUrl,
-              width: 12.w,
-              height: 12.w,
+            (imgUrl.contains(".svg") == false) == true?
+                Image.asset(imgUrl,
+                  width: 40,
+                  height: 40,
+
+                )
+                : SvgPicture.asset(
+              imgUrl,
+              width: 40,
+              height: 40,
             ),
             // CustomNetworkImage(
             //   url: imgUrl,
