@@ -19,13 +19,16 @@ class ChestCubit extends Cubit<ChestState> {
   int chestId =0;
 
   List<String> chests = [
-    "images/chest1.png",
-    "images/chest2.png",
-    "images/chest3.png",
-    "images/chest4.png",
-    "images/chest5.png",
-    "images/chest6.png",
+    // "images/chest1.png",
+    // "images/chest2.png",
+    // "images/chest3.png",
+    // "images/chest4.png",
+    // "images/chest5.png",
+    // "images/chest6.png",
 
+    "images/chest/دائري.svg",
+    "images/chest/مثلث.svg",
+    "images/chest/مربع.svg"
   ];
 
   getChest(BuildContext context){

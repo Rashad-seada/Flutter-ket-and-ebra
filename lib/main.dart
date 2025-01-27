@@ -82,9 +82,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => HomeAdsCubit()),
         BlocProvider(create: (_) => AddAdsCubit()),
       ],
-      child: Sizer(
+      child: ResponsiveSizer(
         builder: (BuildContext context, Orientation orientation,
-            DeviceType deviceType) {
+            ScreenType screenType) {
           return MaterialApp(
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,

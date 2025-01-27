@@ -17,10 +17,26 @@ class CollarCubit extends Cubit<CollarState> {
   int collarId = 0;
 
   List<String> collars = [
-    "images/yaka0.svg",
-    "images/yaka1.svg",
-    "images/yaka2.svg",
-    "images/yaka3.svg"
+    // "images/yaka0.svg",
+    // "images/yaka1.svg",
+    // "images/yaka2.svg",
+    // "images/yaka3.svg"
+"images/collar/صيني دائري.svg",
+    "images/collar/صيني دائري مسكر.svg",
+    "images/collar/صيني دائري مفتوح.svg",
+    "images/collar/صيني مربع.svg",
+    "images/collar/صيني مربع مسكر.svg",
+    "images/collar/صيني مربع مفتوح.svg",
+    "images/collar/عادي.svg",
+
+    "عادي مخفي.svg",
+    "images/collar/عادي مخفي مشطوف.svg",
+    "images/collar/قلاب.svg",
+    "images/collar/قلاب فرنسي.aiمخفي.svg",
+    "images/collar/قلاب فرنسي.svg",
+    "images/collar/قلاب مخفي.svg",
+    "images/collar/قلاب مسكر.svg",
+    "images/collar/قلاب مسكر خفي .svg"
 
   ];
 

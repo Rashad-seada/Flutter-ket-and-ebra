@@ -17,13 +17,22 @@ class SleeveCubit extends Cubit<SleeveState> {
 
   int sleeveId = 0;
   List<String> sleeves = [
-    "images/sleeve1.png",
-    "images/sleeve2.png",
-    "images/sleeve3.png",
-    "images/sleeve4.png",
-    "images/sleeve5.png",
-    "images/sleeve6.png",
+    // "images/sleeve1.png",
+    // "images/sleeve2.png",
+    // "images/sleeve3.png",
+    // "images/sleeve4.png",
+    // "images/sleeve5.png",
+    // "images/sleeve6.png",
 
+    "images/sleeve/كبك.svg",
+    "images/sleeve/كبك قماش.svg",
+    "images/sleeve/كبك مشطوف.svg",
+    "images/sleeve/كبك مشطوف مع جبزور.svg",
+    "images/sleeve/كبك مع جبزور.svg",
+    "images/sleeve/كبك-دائري.svg",
+    "images/sleeve/كبك-دائري-مع-جبزور.svg",
+    "images/sleeve/كبك-قماش-دائري.svg",
+    "images/sleeve/كبك-قماش-مشطوف.svg"
   ];
 
 

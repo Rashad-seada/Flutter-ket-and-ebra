@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg2"
+   width="1440"
+   height="1440"
+   viewBox="0 0 1440 1440"
+   sodipodi:docname="مشطوف.ai"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs6" />
+  <sodipodi:namedview
+     id="namedview4"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1" />
+  <g
+     id="g8"
+     inkscape:groupmode="layer"
+     inkscape:label="مشطوف"
+     transform="matrix(1.3333333,0,0,-1.3333333,0,1440)">
+    <g
+       id="g10"
+       transform="translate(250.49,378.89)">
+      <path
+         d="M 0,0 V 487.65 H 576.55 V -2.84"
+         style="fill:none;stroke:#231f20;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path12" />
+    </g>
+    <g
+       id="g14"
+       transform="translate(725.24,290)">
+      <path
+         d="M 0,0 H -364.56"
+         style="fill:none;stroke:#231f20;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path16" />
+    </g>
+    <g
+       id="g18"
+       transform="translate(250.4938,719.6296)">
+      <path
+         d="M 0,0 H 572.839"
+         style="fill:none;stroke:#231f20;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path20" />
+    </g>
+    <g
+       id="g22"
+       transform="translate(250.4938,378.8889)">
+      <path
+         d="M 0,0 110.185,-88.889"
+         style="fill:none;stroke:#231f20;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path24" />
+    </g>
+    <g
+       id="g26"
+       transform="translate(827.04,376.05)">
+      <path
+         d="M 0,0 -101.8,-86.05"
+         style="fill:none;stroke:#231f20;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path28" />
+    </g>
+    <g
+       id="g30"
+       transform="translate(785.0636,871.4733)">
+      <path
+         d="M 0,0 V -99.14 H -496.3 V 0"
+         style="fill:none;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:12;stroke-dashoffset:0;stroke-opacity:1"
+         id="path32" />
+    </g>
+  </g>
+</svg>

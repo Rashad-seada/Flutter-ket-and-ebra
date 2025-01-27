@@ -56,10 +56,10 @@ dependencies:
   get_it:
 
   # Firebase
-  firebase_auth:
-  firebase_core:
+  firebase_auth: ^5.4.1
+  firebase_core: ^3.10.1
 
-  activout_firebase_options_selector:
+  #activout_firebase_options_selector:
 
   # UI
   sizer:
@@ -121,6 +121,10 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - images/
+    - images/chest/
+    - images/sleeve/
+    - images/collar/
+
     - assets/translations/
     - assets/fonts/
 

@@ -18,13 +18,20 @@ class FrontPocketCubit extends Cubit<FrontPocketState> {
   int frontPocketId = 0;
   //-1;
   List<String> frontPockets = [
-    "images/pocket1.png",
-    "images/pocket2.png",
-    "images/pocket3.png",
-    "images/pocket4.png",
-    "images/pocket5.png",
-    "images/pocket6.png",
-    "images/pocket7.png",
+    // "images/pocket1.png",
+    // "images/pocket2.png",
+    // "images/pocket3.png",
+    // "images/pocket4.png",
+    // "images/pocket5.png",
+    // "images/pocket6.png",
+    // "images/pocket7.png",
+    "images/دئري جيب قلم.svg",
+    "images/مخفي.svg",
+    "images/مخفي جيب قلم.svg",
+    "images/مربع.svg",
+    "images/مربع جيب قلم.svg",
+    "images/مشطوف.svg",
+    "images/مشطوف جيب قلم.svg"
 
   ];
 

@@ -26,7 +26,7 @@ class VariantCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            (imgUrl.contains(".svg") == false) == true?
+            (imgUrl.contains(".svg") == false) ?
                 Image.asset(imgUrl,
                   width: 40,
                   height: 40,

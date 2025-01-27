@@ -98,16 +98,16 @@ class _ChestScreenState extends State<ChestScreen> {
                       ),
                       Stack(
                         children: [
-                          Image.asset(
-                            "images/empty_thob.png",
-                            width: 300,
-                            height: 300,
-                            fit: BoxFit.contain,
+                          SvgPicture.asset(
+                            "images/الثوب الاساسي.svg",
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height * 0.5,
+                            fit: BoxFit.cover,
                           ),
                           Positioned(
                             top: 80,
-                            right: 40,
-                            child: Image.asset(
+                            right: 77,
+                            child: SvgPicture.asset(
                               context.read<FrontPocketCubit>().frontPockets[
                                   context
                                       .read<FrontPocketCubit>()
@@ -117,10 +117,12 @@ class _ChestScreenState extends State<ChestScreen> {
                             ),
                           ),
                           Positioned(
-                            top: 0,
+                            top: 35,
                             right: 0,
                             left: 0,
-                            child: SvgPicture.asset(
+                            child:
+
+                            SvgPicture.asset(
                               context.read<CollarCubit>().collars[
                                   context.read<CollarCubit>().collarId],
                               width: 40,
@@ -128,11 +130,11 @@ class _ChestScreenState extends State<ChestScreen> {
                             ),
                           ),
                           Positioned(
-                            top: 0,
+                            top: 50,
                             right: 0,
                             bottom: 0,
                             left: 0,
-                            child: Image.asset(
+                            child: SvgPicture.asset(
                               context
                                   .read<ChestCubit>()
                                   .chests[context.read<ChestCubit>().chestId],
@@ -142,8 +144,8 @@ class _ChestScreenState extends State<ChestScreen> {
                           ),
                           Positioned(
                             top: 110,
-                            left: 30,
-                            child: Image.asset(
+                            left: 70,
+                            child: SvgPicture.asset(
                               context.read<SleeveCubit>().sleeves[
                                   context.read<SleeveCubit>().sleeveId],
                               width: 120,
