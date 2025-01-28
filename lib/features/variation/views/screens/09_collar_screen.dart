@@ -117,9 +117,9 @@ class _CollarScreenState extends State<CollarScreen> {
                           ),
                         ),
                         Positioned(
-                          top: 50,
+                          top: 55,
                           right: 0,
-                          bottom: 0,
+                          bottom:50,
                           left: 0,
                           child: SvgPicture.asset(
                             context
@@ -169,10 +169,16 @@ class _CollarScreenState extends State<CollarScreen> {
                       //CollarSuccess.collars.length,
                       // Number of items
                       itemBuilder: (BuildContext context, int index) {
+
+                        var title =  context
+                            .read<CollarCubit>()
+                            .collars[index]?.replaceAll(".svg", "")?.replaceAll("images/collar/", "")??"-";
+
+
                         // Function that returns a widget for each item
                         return VariantCard(
                             isSelect: index == collarId,
-                            title: "yaka$index",
+                            title:title ,
                             //CollarSuccess.collars[index].name ?? "unknown",
                             imgUrl: context.read<CollarCubit>().collars[index],
                             // AppConsts.imgUrl +

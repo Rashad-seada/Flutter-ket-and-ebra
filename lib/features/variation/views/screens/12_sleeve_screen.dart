@@ -127,9 +127,9 @@ class _SleeveScreenState extends State<SleeveScreen> {
                             ),
                           ),
                           Positioned(
-                            top: 50,
+                            top: 55,
                             right: 0,
-                            bottom: 0,
+                            bottom: 50,
                             left: 0,
                             child: SvgPicture.asset(
                               context
@@ -168,10 +168,13 @@ class _SleeveScreenState extends State<SleeveScreen> {
                         //SleeveSuccess.sleeves.length,
                         // Number of items
                         itemBuilder: (BuildContext context, int index) {
+
+                          var title = context.read<SleeveCubit>().sleeves[index]?.replaceAll(".svg",
+                              "")?.replaceAll("images/sleeve/","");
                           // Function that returns a widget for each item
                           return VariantCard(
                             isSelect: index == sleeveId,
-                            title: "sleeves$index",
+                            title: title??"-",
                             //SleeveSuccess.sleeves[index].name ?? "Unknown",
                             imgUrl: context.read<SleeveCubit>().sleeves[index],
                             // AppConsts.imgUrl +

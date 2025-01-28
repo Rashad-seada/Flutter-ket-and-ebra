@@ -68,7 +68,7 @@ class _FrontPocketScreenState extends State<FrontPocketScreen> {
               padding: EdgeInsets.symmetric(horizontal: 6.5.w),
               child: CustomHeader(
                 title: LocaleKeys.front_pocket.tr(),
-                onPop:(){
+                onPop: () {
                   context.read<CollarCubit>().refresh();
                 },
               ),
@@ -93,7 +93,8 @@ class _FrontPocketScreenState extends State<FrontPocketScreen> {
                     },
                   );
                 } else if (state is FrontPocketSuccess ||
-                    state is FrontPocketSelected || state is RefreshFrontPocketScreen) {
+                    state is FrontPocketSelected ||
+                    state is RefreshFrontPocketScreen) {
                   return Column(
                     children: [
                       Space(
@@ -123,9 +124,7 @@ class _FrontPocketScreenState extends State<FrontPocketScreen> {
                             top: 35,
                             right: 0,
                             left: 0,
-                            child:
-
-                            SvgPicture.asset(
+                            child: SvgPicture.asset(
                               context.read<CollarCubit>().collars[
                                   context.read<CollarCubit>().collarId],
                               width: 40,
@@ -133,9 +132,9 @@ class _FrontPocketScreenState extends State<FrontPocketScreen> {
                             ),
                           ),
                           Positioned(
-                            top: 50,
+                            top: 55,
                             right: 0,
-                            bottom: 0,
+                            bottom: 50,
                             left: 0,
                             child: SvgPicture.asset(
                               context
@@ -148,8 +147,7 @@ class _FrontPocketScreenState extends State<FrontPocketScreen> {
                           Positioned(
                             top: 110,
                             left: 70,
-                            child:
-                            SvgPicture.asset(
+                            child: SvgPicture.asset(
                               context.read<SleeveCubit>().sleeves[
                                   context.read<SleeveCubit>().sleeveId],
                               width: 120,
@@ -191,11 +189,13 @@ class _FrontPocketScreenState extends State<FrontPocketScreen> {
                         itemBuilder: (BuildContext context, int index) {
                           var title = context
                               .read<FrontPocketCubit>()
-                              .frontPockets[index].split(".svg")?.first;
+                              .frontPockets[index]
+                              .replaceAll(".svg", "")
+                              .replaceAll("images/", "");
                           // Function that returns a widget for each item
                           return VariantCard(
                               isSelect: index == frontPocketId,
-                              title: title??"-",
+                              title: title ?? "-",
                               //FrontPocketSuccess.frontPockets[index].name ?? "unknown",
                               imgUrl: context
                                   .read<FrontPocketCubit>()

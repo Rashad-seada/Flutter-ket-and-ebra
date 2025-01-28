@@ -130,9 +130,9 @@ class _ChestScreenState extends State<ChestScreen> {
                             ),
                           ),
                           Positioned(
-                            top: 50,
+                            top: 55,
                             right: 0,
-                            bottom: 0,
+                            bottom: 50,
                             left: 0,
                             child: SvgPicture.asset(
                               context
@@ -172,10 +172,14 @@ class _ChestScreenState extends State<ChestScreen> {
                         //ChestSuccess.chests.length,
                         // Number of items
                         itemBuilder: (BuildContext context, int index) {
+                          var title  = context
+                              .read<ChestCubit>()
+                              .chests[index]?.replaceAll(".svg", "")?.replaceAll("images/chest/",
+                              "");
                           // Function that returns a widget for each item
                           return VariantCard(
                               isSelect: index == chestId,
-                              title: "chest$index",
+                              title: title??"-",
                               //ChestSuccess.chests[index].name ?? "Unknown",
                               imgUrl: context.read<ChestCubit>().chests[index],
                               // AppConsts.imgUrl +
